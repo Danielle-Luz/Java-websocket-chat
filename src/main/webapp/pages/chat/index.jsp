@@ -13,19 +13,10 @@
   <body class="outer-container">
     <main class="main-container">
       <section class="messages-section">
-        <article class="message other-user-message">
-          <p>Lorem ipsum dolor sit amet consectetur</p>
-        </article>
-        <article class="message other-user-message">
-          <p>Lorem ipsum dolor sit amet consectetur</p>
-        </article>
-        <article class="message current-user-message">
-          <p>Lorem ipsum dolor sit amet consectetur</p>
-        </article>
       </section>
       <section class="input-wrapper">
-        <input class="message-input" type="text" />
-        <button class="send-message-button">
+        <input class="message-input" type="text" onkeydown="sendMessageOnPressingEnter(this)" />
+        <button class="send-message-button" onclick="sendMessage()">
           <img 
             width="24"
             height="24" 
