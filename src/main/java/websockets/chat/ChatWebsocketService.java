@@ -5,14 +5,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
 import javax.websocket.Session;
+
 import org.json.JSONObject;
 
 public class ChatWebsocketService {
 
   private static final ChatSessionHandler chatSessionHandler = ChatSessionHandlerFactory.getChatSessionHandler();
 
-  public static void addSessionToChat(
+  public static List<Session> addSessionToChatSessionList(
     String message,
     Session messageSenderSession
   ) {
@@ -23,29 +25,31 @@ public class ChatWebsocketService {
     List<Session> sessionsInChat = sessionsByChatId.get(chatId);
 
     if (sessionsInChat == null) {
-      sessionsByChatId.put(
-        chatId,
-        new ArrayList<>(Arrays.asList(messageSenderSession))
-      );
+      sessionsInChat = new ArrayList<>(Arrays.asList(messageSenderSession));
+      sessionsByChatId.put(chatId, sessionsInChat);
+    } else {
+      boolean isSessionInList = sessionsInChat
+        .stream()
+        .anyMatch(existentSession -> existentSession == messageSenderSession);
 
-      return;
+      if (!isSessionInList) {
+        sessionsInChat.add(messageSenderSession);
+      }
     }
 
-    boolean isSessionInList = sessionsInChat
-      .stream()
-      .anyMatch(existentSession -> existentSession == messageSenderSession);
-
-    if (!isSessionInList) {
-      sessionsInChat.add(messageSenderSession);
-    }
+    return sessionsInChat;
   }
 
-  public static void sendMessageToAllSessions(
+  public static void sendMessageToSessionsInChat(
     String message,
     Session senderSession
   ) {
-    List<Session> openSessions = chatSessionHandler.getOpenSessions();
-    openSessions
+    List<Session> chatSessionsList = addSessionToChatSessionList(
+      message,
+      senderSession
+    );
+
+    chatSessionsList
       .stream()
       .forEach(session -> {
         try {

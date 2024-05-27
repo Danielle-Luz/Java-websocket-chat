@@ -23,6 +23,6 @@ public class ChatWebsocket {
 
   @OnMessage
   public void onReceiveMessage(String message, Session senderSession) {
-    ChatWebsocketService.sendMessageToAllSessions(message, senderSession);
+    ChatWebsocketService.sendMessageToSessionsInChat(message, senderSession);
   }
 }
