@@ -14,7 +14,7 @@
 
   <body class="outer-container">
     <main class="options-container">
-      <button class="option">Create a new chat room</button>
+      <button class="option" onclick="redirectToChatIdGenerator()">Create a new chat room</button>
       <button class="option">Join an existing chat room</button>
     </main>
   </body>

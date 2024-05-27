@@ -1,7 +1,7 @@
 const chatWebsocket = new WebSocket("ws://localhost:8080/chat");
 chatWebsocket.onmessage = receiveMessage;
 
-function receiveMessage(event) {
+function receiveMessage(event, chatId) {
   const messageContent = JSON.parse(event.data);
   appendMessage(messageContent, (isCurrentUserSending = false));
 }
@@ -9,9 +9,11 @@ function receiveMessage(event) {
 function sendMessage() {
   const sender = "";
   const messageInput = document.querySelector(".message-input");
+  const chatId = document.getElementById("chat-id").innerText;
   const messageText = messageInput.value;
 
   const messageContent = {
+    chatId,
     sender,
     message: messageText,
   };

@@ -15,8 +15,12 @@
       <section class="messages-section">
       </section>
       <section class="input-wrapper">
+        <%
+          String chatId = request.getParameter("chatId");
+          out.println("<span id='chat-id' hidden='true'>" + chatId + "</span>");
+        %>
         <input class="message-input" type="text" onkeydown="sendMessageOnPressingEnter(this)" />
-        <button class="send-message-button" onclick="sendMessage()">
+        <button class="send-message-button" onclick="sendMessage()">\
           <img 
             width="24"
             height="24" 
