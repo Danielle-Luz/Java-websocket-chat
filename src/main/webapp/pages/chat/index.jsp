@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./index.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/globalStyles.css" type="text/css" />
     <script src="./index.js" type="text/javascript" defer></script>
+    <script src="./../../scripts/autoResizeTextarea.js" type="text/javascript" defer></script>
   </head>
 
   <body class="outer-container">
@@ -20,8 +21,8 @@
             String chatId = request.getParameter("chatId");
             out.println("<span id='chat-id' hidden='true'>" + chatId + "</span>");
           %>
-          <input class="message-input" type="text" onkeydown="sendMessageOnPressingEnter(this)" />
-          <button class="send-message-button" onclick="sendMessage()">\
+          <textarea rows="1" class="message-input" onkeydown="sendMessageOnPressingEnter(this)"></textarea>
+          <button class="send-message-button" onclick="sendMessage()">
             <img 
               width="24"
               height="24" 

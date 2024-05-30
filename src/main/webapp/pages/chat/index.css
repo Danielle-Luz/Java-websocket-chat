@@ -63,6 +63,7 @@
   caret-color: var(--message-text-color);
   color: var(--message-text-color);
   flex-grow: 1;
+  max-height: 180px;
 }
 
 .message-input:focus {
