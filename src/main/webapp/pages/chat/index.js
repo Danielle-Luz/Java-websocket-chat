@@ -1,9 +1,16 @@
 const chatWebsocket = new WebSocket("ws://localhost:8080/chat");
 chatWebsocket.onmessage = receiveMessage;
+chatWebsocket.onopen = () => sendChatId("New session in the chat");
 
-function receiveMessage(event, chatId) {
-  const messageContent = JSON.parse(event.data);
-  appendMessage(messageContent, (isCurrentUserSending = false));
+function sendChatId(type) {
+  const chatId = document.getElementById("chat-id").innerText;
+  const messageContent = { chatId, type };
+  chatWebsocket.send(JSON.stringify(messageContent));
+}
+
+function receiveMessage(event) {
+  const receivedMessage = event.data;
+  appendMessage(receivedMessage, (isCurrentUserSending = false));
 }
 
 function sendMessage() {
@@ -15,10 +22,11 @@ function sendMessage() {
   const messageContent = {
     chatId,
     sender,
+    type: "New message sent",
     message: messageText,
   };
 
-  appendMessage(messageContent, (isCurrentUserSending = true));
+  appendMessage(messageText, (isCurrentUserSending = true));
 
   chatWebsocket.send(JSON.stringify(messageContent));
 
@@ -31,7 +39,7 @@ function sendMessageOnPressingEnter() {
   }
 }
 
-function appendMessage(messageContent, isCurrentUserSending) {
+function appendMessage(message, isCurrentUserSending) {
   const messageSection = document.querySelector(".messages-section");
   const messageContainer = document.createElement("article");
   const messageText = document.createElement("p");
@@ -42,7 +50,7 @@ function appendMessage(messageContent, isCurrentUserSending) {
 
   messageContainer.className = `message ${senderDependentStyle}`;
 
-  messageText.innerText = messageContent.message;
+  messageText.innerText = message;
 
   messageContainer.appendChild(messageText);
   messageSection.appendChild(messageContainer);

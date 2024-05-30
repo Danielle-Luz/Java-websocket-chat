@@ -1,6 +1,9 @@
 package websockets.chat;
 
+import java.io.IOException;
+
 import javax.websocket.OnClose;
+import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
@@ -17,12 +20,17 @@ public class ChatWebsocket {
   }
 
   @OnClose
-  public void onClientDesconnect(Session finishedSession) {
+  public void onClientDesconnect(Session finishedSession) throws IOException {
     chatSessionHandler.removeSession(finishedSession);
   }
 
   @OnMessage
   public void onReceiveMessage(String message, Session senderSession) {
-    ChatWebsocketService.sendMessageToSessionsInChat(message, senderSession);
+    ChatWebsocketService.handleMessageByType(message, senderSession);
+  }
+
+  @OnError
+  public void onError(Throwable error) {
+    System.out.println(error.getMessage());
   }
 }

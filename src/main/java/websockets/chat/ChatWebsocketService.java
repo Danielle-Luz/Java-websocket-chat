@@ -14,11 +14,27 @@ public class ChatWebsocketService {
 
   private static final ChatSessionHandler chatSessionHandler = ChatSessionHandlerFactory.getChatSessionHandler();
 
-  public static List<Session> addSessionToChatSessionList(
+  public static void handleMessageByType(
     String message,
-    Session messageSenderSession
+    Session senderSession
   ) {
     JSONObject messageAsJson = new JSONObject(message);
+    String messageType = messageAsJson.getString("type");
+
+    switch (messageType) {
+      case "New message sent":
+        sendMessageToSessionsInChat(messageAsJson, senderSession);
+        break;
+      case "New session in the chat":
+        addSessionToChatSessionList(messageAsJson, senderSession);
+        break;
+    }
+  }
+
+  private static List<Session> addSessionToChatSessionList(
+    JSONObject messageAsJson,
+    Session messageSenderSession
+  ) {
     String chatId = messageAsJson.getString("chatId");
 
     Map<String, List<Session>> sessionsByChatId = chatSessionHandler.getSessionsByChatId();
@@ -40,14 +56,16 @@ public class ChatWebsocketService {
     return sessionsInChat;
   }
 
-  public static void sendMessageToSessionsInChat(
-    String message,
+  private static void sendMessageToSessionsInChat(
+    JSONObject messageAsJson,
     Session senderSession
   ) {
     List<Session> chatSessionsList = addSessionToChatSessionList(
-      message,
+      messageAsJson,
       senderSession
     );
+
+    String message = messageAsJson.getString("message");
 
     chatSessionsList
       .stream()

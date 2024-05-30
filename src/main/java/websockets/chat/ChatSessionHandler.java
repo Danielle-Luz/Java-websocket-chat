@@ -1,9 +1,11 @@
 package websockets.chat;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.websocket.Session;
 
 public class ChatSessionHandler {
@@ -15,8 +17,14 @@ public class ChatSessionHandler {
     this.openSessions.add(newSession);
   }
 
-  public void removeSession(Session closedSession) {
+  public void removeSession(Session closedSession) throws IOException {
     this.openSessions.remove(closedSession);
+    this.sessionsByChatId.values()
+      .stream()
+      .filter(chatSessions -> chatSessions.contains(closedSession))
+      .forEach(chatWithRemovedSession ->
+        chatWithRemovedSession.remove(closedSession)
+      );
   }
 
   public List<Session> getOpenSessions() {
