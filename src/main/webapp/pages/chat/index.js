@@ -2,22 +2,22 @@ const chatWebsocket = new WebSocket("ws://localhost:8080/chat");
 chatWebsocket.onmessage = receiveMessage;
 chatWebsocket.onopen = () => sendChatId("New session in the chat");
 
-function sendChatId(type) {
+async function sendChatId(type) {
   const chatId = document.getElementById("chat-id").innerText;
   const messageContent = { chatId, type };
   chatWebsocket.send(JSON.stringify(messageContent));
 }
 
-function receiveMessage(event) {
+async function receiveMessage(event) {
   const receivedMessage = event.data;
   appendMessage(receivedMessage, (isCurrentUserSending = false));
 }
 
-function sendMessage() {
+async function sendMessage() {
   const sender = "";
-  const messageInput = document.querySelector(".message-input");
+  const messageTextarea = document.querySelector(".message-input");
   const chatId = document.getElementById("chat-id").innerText;
-  const messageText = messageInput.value;
+  const messageText = messageTextarea.value;
 
   const messageContent = {
     chatId,
@@ -30,14 +30,18 @@ function sendMessage() {
 
   chatWebsocket.send(JSON.stringify(messageContent));
 
-  messageInput.value = "";
+  messageTextarea.value = "";
 }
 
 function sendMessageOnPressingEnter() {
-  if (event.key == "Enter") {
-    sendMessage();
-  }
-}
+  const messageTextarea = document.querySelector(".message-input");
+
+  messageTextarea.addEventListener("input", (event) => {
+    if (event.inputType == "insertLineBreak") {
+      sendMessage();
+    }
+  });
+};
 
 function appendMessage(message, isCurrentUserSending) {
   const messageSection = document.querySelector(".messages-section");
@@ -55,3 +59,5 @@ function appendMessage(message, isCurrentUserSending) {
   messageContainer.appendChild(messageText);
   messageSection.appendChild(messageContainer);
 }
+
+sendMessageOnPressingEnter();

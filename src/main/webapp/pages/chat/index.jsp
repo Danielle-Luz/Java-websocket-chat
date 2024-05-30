@@ -21,7 +21,7 @@
             String chatId = request.getParameter("chatId");
             out.println("<span id='chat-id' hidden='true'>" + chatId + "</span>");
           %>
-          <textarea rows="1" class="message-input" onkeydown="sendMessageOnPressingEnter(this)"></textarea>
+          <textarea rows="1" class="message-input"></textarea>
           <button class="send-message-button" onclick="sendMessage()">
             <img 
               width="24"
