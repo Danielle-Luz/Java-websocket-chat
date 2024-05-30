@@ -1,0 +1,13 @@
+.primary-button {
+  background-color: var(--current-user-message-background);
+  border-radius: var(--radius-pill);
+  color: var(--message-text-color);
+  font-size: var(--font-size-text-big);
+  max-width: 300px;
+  padding: 10px 20px;
+  width: 100%;
+}
+
+.primary-button:hover {
+  background-color: var(--other-user-message-background);
+}

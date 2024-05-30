@@ -8,14 +8,15 @@
 
     <link rel="stylesheet" href="./index.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/globalStyles.css" type="text/css" />
+    <link rel="stylesheet" href="./../../styles/buttons.css" type="text/css" />
 
     <script src="./index.js" type="text/javascript" defer></script>
   </head>
 
   <body class="outer-container">
-    <main class="options-container">
-      <button class="option" onclick="redirectToChatIdGenerator()">Create a new chat room</button>
-      <button class="option">Join an existing chat room</button>
+    <main class="center-container">
+      <button class="primary-button" onclick="redirectToChatIdGenerator()">Create a new chat room</button>
+      <button class="primary-button">Join an existing chat room</button>
     </main>
   </body>
 </html>
