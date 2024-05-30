@@ -8,7 +8,7 @@
   flex-direction: column;
   max-width: 725px;
   max-height: 730px;
-  padding: 20px;
+  position: relative;
   width: 100%;
 }
 
@@ -17,6 +17,7 @@
   flex-direction: column;
   flex-grow: 1;
   gap: 10px;
+  padding: 20px;
   width: 100%;
 }
 
@@ -41,9 +42,15 @@
   background-color: var(--other-user-message-background);
 }
 
-.input-wrapper {
+.input-external-wrapper {
+  background-color: var(--background-color);
+  bottom: 0;
+  padding: 20px;
+  position: sticky;
+}
+
+.input-container {
   background-color: var(--current-user-message-background);
-  margin-top: 20px;
   border-radius: var(--radius-pill);
   display: flex;
   gap: 10px;

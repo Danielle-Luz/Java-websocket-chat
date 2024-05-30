@@ -14,20 +14,22 @@
     <main class="main-container">
       <section class="messages-section">
       </section>
-      <section class="input-wrapper">
-        <%
-          String chatId = request.getParameter("chatId");
-          out.println("<span id='chat-id' hidden='true'>" + chatId + "</span>");
-        %>
-        <input class="message-input" type="text" onkeydown="sendMessageOnPressingEnter(this)" />
-        <button class="send-message-button" onclick="sendMessage()">\
-          <img 
-            width="24"
-            height="24" 
-            src="https://img.icons8.com/material-rounded/24/FFFFFF/filled-sent.png" alt="Paper airplane icon indicating that a message will be sent"
-          />
-        </button>
-      </section>
+      <div class="input-external-wrapper">
+        <section class="input-container">
+          <%
+            String chatId = request.getParameter("chatId");
+            out.println("<span id='chat-id' hidden='true'>" + chatId + "</span>");
+          %>
+          <input class="message-input" type="text" onkeydown="sendMessageOnPressingEnter(this)" />
+          <button class="send-message-button" onclick="sendMessage()">\
+            <img 
+              width="24"
+              height="24" 
+              src="https://img.icons8.com/material-rounded/24/FFFFFF/filled-sent.png" alt="Paper airplane icon indicating that a message will be sent"
+            />
+          </button>
+        </section>
+      </div>
     </main>
   </body>
 </html>
