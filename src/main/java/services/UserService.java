@@ -4,18 +4,23 @@ import database.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import models.User;
+import utils.EncryptUtils;
 
 public class UserService {
 
   public static User createUser(User newUser) {
     try {
-      String insertSql = String.format(
-        "INSERT INTO user(username, password) VALUES ('%s', '%s')",
-        newUser.getUsername(),
+      String encryptedPassword = EncryptUtils.encryptValue(
         newUser.getPassword()
       );
 
-      ResultSet createdRow = DatabaseConnector.executeDml(insertSql);
+      String insertUserQuery = String.format(
+        "INSERT INTO user(username, password) VALUES ('%s', '%s')",
+        newUser.getUsername(),
+        encryptedPassword
+      );
+
+      ResultSet createdRow = DatabaseConnector.executeDml(insertUserQuery);
 
       return new User(
         createdRow.getInt("id"),
@@ -27,6 +32,4 @@ public class UserService {
       return null;
     }
   }
-
-  
 }
