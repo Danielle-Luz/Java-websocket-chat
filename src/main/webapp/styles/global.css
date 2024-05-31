@@ -14,7 +14,7 @@
   --color-terciary: #e55956;
 
   --font-size-title-normal: 1rem;
-  --font-size-text-big: 1.2rem;
+  --font-size-title-big: 1.2rem;
   --font-size-text-normal: 0.875rem;
 
   --radius-pill: 20px;
@@ -38,10 +38,11 @@ body {
 button {
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
 
-button:hover {
-  cursor: pointer;
+input {
+  border: none;
 }
 
 textarea {
@@ -61,4 +62,8 @@ p {
 ul {
   list-style-type: none;
   margin: 0;
+}
+
+fieldset {
+  border: none;
 }

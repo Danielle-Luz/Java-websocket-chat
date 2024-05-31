@@ -1,0 +1,65 @@
+.content-container {
+  align-items: center;
+  background-color: var(--color-grey-200);
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.side-banner-container {
+  background-color: var(--color-grey-300);
+  max-width: 400px;
+  width: 100%;
+}
+
+.register-external-container {
+  align-items: center;
+  background-color: var(--color-grey-300);
+  border-radius: var(--radius-square);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 500px;
+  padding: 50px 30px;
+  width: 100%;
+}
+
+.register-container {
+  max-width: 300px;
+  width: 100%;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 50px;
+  text-align: center;
+  width: 100%;
+}
+
+.register-title {
+  font-size: var(--font-size-title-big);
+}
+
+.register-description {
+  color: var(--color-grey-100);
+  font-size: var(--font-size-text-normal);
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-2 {
+  max-width: none;
+}

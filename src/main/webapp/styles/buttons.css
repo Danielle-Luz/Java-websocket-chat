@@ -14,6 +14,10 @@
   transition: 0.3s;
 }
 
+.primary-button:hover {
+  background-color: var(--color-primary-darker);
+}
+
 .primary-button,
 .primary-button-text {
   color: var(--color-grey-300);
