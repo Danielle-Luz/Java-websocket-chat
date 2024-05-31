@@ -8,9 +8,9 @@
 
     <link rel="stylesheet" href="./../../styles/globalStyles.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/buttons.css" type="text/css" />
-    <link rel="stylesheet" href="./pages/chatJoinLink/index.css" type="text/css" />
+    <link rel="stylesheet" href="./views/chatJoinLink/index.css" type="text/css" />
 
-    <script src="./pages/chatJoinLink/index.js" type="text/javascript" defer></script>
+    <script src="./views/chatJoinLink/index.js" type="text/javascript" defer></script>
   </head>
 
   <body class="outer-container">

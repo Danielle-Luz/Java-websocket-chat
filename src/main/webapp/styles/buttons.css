@@ -60,3 +60,16 @@
 .secondary-button:hover {
   background-color: var(--color-grey-200);
 }
+
+.terciary-button {
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-square);
+  color: var(--color-primary);
+  font-weight: bold;
+  padding: 10px 15px;
+  transition: 0.3s;
+}
+
+.terciary-button:hover {
+  background-color: var(--color-grey-200);
+}

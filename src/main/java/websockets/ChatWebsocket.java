@@ -1,4 +1,4 @@
-package websockets.chat;
+package websockets;
 
 import java.io.IOException;
 
@@ -9,10 +9,14 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import factories.ChatSessionServiceFactory;
+import services.ChatSessionService;
+import services.ChatWebsocketService;
+
 @ServerEndpoint("/chat")
 public class ChatWebsocket {
 
-  ChatSessionHandler chatSessionHandler = ChatSessionHandlerFactory.getChatSessionHandler();
+  ChatSessionService chatSessionHandler = ChatSessionServiceFactory.getChatSessionService();
 
   @OnOpen
   public void onClientConnect(Session newSession) {

@@ -6,13 +6,7 @@
   height: 100vh;
 }
 
-.side-banner-container {
-  background-color: var(--color-grey-300);
-  max-width: 400px;
-  width: 100%;
-}
-
-.register-external-container {
+.form-external-container {
   align-items: center;
   background-color: var(--color-grey-300);
   border-radius: var(--radius-square);
@@ -24,7 +18,7 @@
   width: 100%;
 }
 
-.register-container {
+.form-container {
   max-width: 300px;
   width: 100%;
 }
@@ -38,16 +32,16 @@
   width: 100%;
 }
 
-.register-title {
+.form-title {
   font-size: var(--font-size-title-big);
 }
 
-.register-description {
+.form-description {
   color: var(--color-grey-100);
   font-size: var(--font-size-text-normal);
 }
 
-.register-form {
+.form {
   display: flex;
   flex-direction: column;
   gap: 30px;

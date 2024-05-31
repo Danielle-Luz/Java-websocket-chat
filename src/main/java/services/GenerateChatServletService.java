@@ -1,4 +1,4 @@
-package servlets.generateChat;
+package services;
 
 import java.io.IOException;
 import java.util.UUID;

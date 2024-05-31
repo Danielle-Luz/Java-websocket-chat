@@ -1,4 +1,4 @@
-package websockets.chat;
+package services;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.Map;
 
 import javax.websocket.Session;
 
-public class ChatSessionHandler {
+public class ChatSessionService {
 
   private final Map<String, List<Session>> sessionsByChatId = new HashMap<>();
   private final List<Session> openSessions = new ArrayList<>();

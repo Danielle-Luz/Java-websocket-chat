@@ -1,4 +1,4 @@
-package websockets.chat;
+package services;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,9 +10,11 @@ import javax.websocket.Session;
 
 import org.json.JSONObject;
 
+import factories.ChatSessionServiceFactory;
+
 public class ChatWebsocketService {
 
-  private static final ChatSessionHandler chatSessionHandler = ChatSessionHandlerFactory.getChatSessionHandler();
+  private static final ChatSessionService chatSessionHandler = ChatSessionServiceFactory.getChatSessionService();
 
   public static void handleMessageByType(
     String message,
