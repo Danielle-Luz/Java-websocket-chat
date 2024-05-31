@@ -87,7 +87,37 @@
 }
 
 .current-chat-content {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
+  gap: 20px;
+  padding: 20px;
+}
+
+.new-chat-message-container {
+  background-color: var(--color-grey-300);
+  border: 1px solid var(--color-grey-200);
+  border-radius: var(--radius-pill);
+  border-bottom-left-radius: 0;
+  max-width: 530px;
+  padding: 20px;
+  width: fit-content;
+}
+
+.new-chat-message-text {
+  width: fit-content;
+  word-break: anywhere;
+}
+
+.another-user-message {
+  align-self: flex-end;
+  background-color: var(--color-secondary);
+  border-radius: var(--radius-pill);
+  border-bottom-right-radius: 0;
+}
+
+.another-user-message .new-chat-message-text {
+  color: var(--color-grey-300);
 }
 
 .message-external-wrapper {
