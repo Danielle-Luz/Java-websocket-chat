@@ -1,0 +1,85 @@
+.content-container {
+  display: flex;
+}
+
+.all-chats-wrapper {
+  background-color: var(--color-grey-300);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 300px;
+  padding-left: 5px;
+  width: 100%;
+}
+
+.new-chat-button-icon {
+  height: 30px;
+  width: 30px;
+}
+
+.new-chat-button {
+  align-items: center;
+  background-color: var(--color-grey-200);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-pill);
+  color: var(--color-primary);
+  display: flex;
+  font-weight: bold;
+  gap: 15px;
+  margin: 0 20px;
+  padding: 5px 10px;
+  width: calc(100% - 45px);
+}
+
+.all-chats-container {
+  background-color: var(--color-grey-200);
+}
+
+.all-chats-title {
+  background-color: var(--color-grey-300);
+  font-size: var(--font-size-text-big);
+  padding: 0 20px 20px;
+}
+
+.all-chats-list-item {
+  background-color: var(--color-grey-300);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 20px;
+}
+
+.chat-name {
+  font-size: var(--font-size-text-normal);
+}
+
+.chat-last-message {
+  color: var(--color-grey-100);
+}
+
+.selected-chat {
+  background-color: var(--color-grey-200);
+  border-left: 4px solid var(--color-terciary);
+}
+
+.selected-chat + .all-chats-list-item {
+  border-top-right-radius: var(--radius-pill);
+}
+
+.all-chats-list-item::after {
+  background-color: var(--color-grey-200);
+  width: 10px;
+  height: 100%;
+  position: absolute;
+}
+
+.all-chats-list-item:has(+ .selected-chat) {
+  border-bottom-right-radius: var(--radius-pill);
+}
+
+.current-chat-container {
+  background-color: var(--color-grey-200);
+  border-radius: var(--radius-pill);
+  flex-grow: 1;
+  margin-right: 20px;
+}

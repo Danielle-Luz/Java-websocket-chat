@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Easychat</title>
+    <link rel="stylesheet" href="./index.css" type="text/css" />
+    <link rel="stylesheet" href="./../../styles/global.css" type="text/css" />
+    <script src="./index.js" type="text/javascript" defer></script>
+  </head>
+  <body class="content-container">
+    <aside class="all-chats-wrapper">
+      <button class="new-chat-button">
+        <img
+          class="new-chat-button-icon"
+          src="https://img.icons8.com/ios-filled/50/004efc/add--v1.png"
+          alt="add icon"
+        />
+        <span>New chat</span>
+      </button>
+      <section class="all-chats-container">
+        <h2 class="all-chats-title">All chats</h2>
+        <ul class="all-chats-list">
+          <li class="all-chats-list-item">
+            <h3 class="chat-name">Chat 1</h3>
+            <p class="chat-last-message">Last message</p>
+          </li>
+          <li class="all-chats-list-item">
+            <h3 class="chat-name">Chat 1</h3>
+            <p class="chat-last-message">Last message</p>
+          </li>
+          <li class="all-chats-list-item">
+            <h3 class="chat-name">Chat 1</h3>
+            <p class="chat-last-message">Last message</p>
+          </li>
+          <li class="all-chats-list-item">
+            <h3 class="chat-name">Chat 1</h3>
+            <p class="chat-last-message">Last message</p>
+          </li>
+          <li class="all-chats-list-item">
+            <h3 class="chat-name">Chat 1</h3>
+            <p class="chat-last-message">Last message</p>
+          </li>
+          <li class="all-chats-list-item selected-chat">
+            <h3 class="chat-name">Chat 1</h3>
+            <p class="chat-last-message">Last message</p>
+          </li>
+          <li class="all-chats-list-item">
+            <h3 class="chat-name">Chat 1</h3>
+            <p class="chat-last-message">Last message</p>
+          </li>
+        </ul>
+      </section>
+    </aside>
+    <main class="current-chat-container">
+      <section class="current-chat-content">
+        <article class="message-container">
+          <p class="message-text"></p>
+          <p class="message-text another-user-message"></p>
+        </article>
+      </section>
+      <section class="message-external-wrapper">
+        <article class="message-container">
+          <textarea class="type-message" placeholder="Type your message...">
+          </textarea>
+          <button class="send-message-button">Send</button>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
