@@ -1,5 +1,5 @@
 (function showModal() {
-  const openModalButton = document.querySelector(".new-chat-button");
+  const openModalButton = document.getElementById("new-chat-button");
 
   openModalButton.addEventListener("click", () => {
     const modalContainer = document.querySelector(".modal-external-container");
@@ -8,11 +8,10 @@
 })();
 
 (function closeModal() {
-  const closeModalButton = document.querySelector(".close-modal-button");
+  const closeModalButton = document.getElementById("close-modal-button");
 
   closeModalButton.addEventListener("click", () => {
     const modalContainer = document.querySelector(".modal-external-container");
-    console.log("clicou");
     modalContainer.classList.add("hide-modal");
   });
 })();

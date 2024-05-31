@@ -12,29 +12,6 @@
   width: 100%;
 }
 
-.new-chat-button-icon {
-  height: 30px;
-  width: 30px;
-}
-
-.new-chat-button {
-  align-items: center;
-  border: 2px solid var(--color-grey-200);
-  border-radius: var(--radius-square);
-  color: var(--color-primary);
-  display: flex;
-  font-weight: bold;
-  gap: 15px;
-  margin: 0 20px;
-  padding: 5px 10px;
-  transition: 0.3s;
-  width: calc(100% - 45px);
-}
-
-.new-chat-button:hover {
-  background-color: var(--color-grey-200);
-}
-
 .all-chats-container {
   background-color: var(--color-grey-200);
 }
@@ -129,27 +106,6 @@
   bottom: 0;
   padding: 20px 0 0;
   position: sticky;
-}
-
-.message-container {
-  align-items: center;
-  background-color: var(--color-grey-300);
-  border-radius: var(--radius-square);
-  display: flex;
-  gap: 20px;
-  padding: 10px;
-  margin: 0 20px 20px;
-}
-
-.type-message {
-  background-color: transparent;
-  border: none;
-  caret-color: var(--message-text-color);
-  color: var(--message-text-color);
-  flex-grow: 1;
-  font-size: var(--font-size-text-normal);
-  max-height: 180px;
-  padding-left: 10px;
 }
 
 .send-message-button-icon {

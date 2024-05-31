@@ -7,6 +7,8 @@
     <title>Easychat</title>
     <link rel="stylesheet" href="./index.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/global.css" type="text/css" />
+    <link rel="stylesheet" href="./../../styles/buttons.css" type="text/css" />
+    <link rel="stylesheet" href="./../../styles/inputs.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/modal.css" type="text/css" />
     <script src="./index.js" type="text/javascript" defer></script>
     <script
@@ -18,9 +20,9 @@
   <body class="content-container">
     <div class="modal-external-container hide-modal">
       <div class="modal-container">
-        <button class="close-modal-button">
+        <button class="icon-button" id="close-modal-button">
           <img
-            class="close-modal-button-icon"
+            class="icon-button-image"
             src="https://img.icons8.com/ios/50/fefefe/cancel.png"
             alt="cancel"
           />
@@ -28,18 +30,19 @@
         <article class="modal">
           <h2 class="modal-title">New chat</h2>
           <input
-            class="modal-input"
+            id="modal-input"
+            class="input-2"
             type="text"
             placeholder="Type the chat name..."
           />
-          <button class="modal-button">Create chat</button>
+          <button class="primary-button">Create chat</button>
         </article>
       </div>
     </div>
     <aside class="all-chats-wrapper">
-      <button class="new-chat-button">
+      <button id="new-chat-button" class="secondary-button">
         <img
-          class="new-chat-button-icon"
+          class="secondary-button-icon"
           src="https://img.icons8.com/ios-filled/50/004efc/add--v1.png"
           alt="add icon"
         />
@@ -95,13 +98,13 @@
         </article>
       </section>
       <section class="message-external-wrapper">
-        <article class="message-container">
-          <textarea class="type-message" placeholder="Type your message...">
+        <article class="input-1-container">
+          <textarea class="input-1" placeholder="Type your message...">
           </textarea>
-          <button class="send-message-button">
-            <span class="send-message-button-text">Send</span>
+          <button class="primary-button">
+            <span class="primary-button-text">Send</span>
             <img
-              class="send-message-button-icon"
+              class="primary-button-icon"
               src="https://img.icons8.com/material-rounded/24/fefefe/sent.png"
               alt="Send message icon"
             />

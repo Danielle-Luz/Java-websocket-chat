@@ -1,13 +1,58 @@
+.primary-button-icon {
+  width: 20px;
+  height: 20px;
+}
+
 .primary-button {
-  background-color: var(--current-user-message-background);
-  border-radius: var(--radius-pill);
-  color: var(--message-text-color);
-  font-size: var(--font-size-text-big);
-  max-width: 300px;
-  padding: 10px 20px;
+  align-items: center;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-square);
+  display: flex;
+  gap: 10px;
+  height: fit-content;
+  padding: 10px 15px;
+  transition: 0.3s;
+}
+
+.primary-button,
+.primary-button-text {
+  color: var(--color-grey-300);
+  font-weight: 600;
+}
+
+.icon-button {
+  height: 40px;
+  transition: 0.3s;
+  width: 40px;
+}
+
+.icon-button:hover {
+  opacity: 50%;
+}
+
+.icon-button-image {
   width: 100%;
 }
 
-.primary-button:hover {
-  background-color: var(--other-user-message-background);
+.secondary-button-icon {
+  height: 30px;
+  width: 30px;
+}
+
+.secondary-button {
+  align-items: center;
+  border: 2px solid var(--color-grey-200);
+  border-radius: var(--radius-square);
+  color: var(--color-primary);
+  display: flex;
+  font-weight: bold;
+  gap: 15px;
+  margin: 0 20px;
+  padding: 5px 10px;
+  transition: 0.3s;
+  width: calc(100% - 45px);
+}
+
+.secondary-button:hover {
+  background-color: var(--color-grey-200);
 }
