@@ -23,7 +23,7 @@ public class DatabaseConnector {
 
       statement.executeUpdate("drop table if exists chat");
       statement.executeUpdate(
-        "CREATE TABLE chat (id INTEGER PRIMARY KEY AUTOINCREMENT, creator_id INTEGER NOT NULL, FOREIGN KEY(creator_id) REFERENCES user(id));"
+        "CREATE TABLE chat (id VARCHAR PRIMARY KEY, creator_id INTEGER NOT NULL, FOREIGN KEY(creator_id) REFERENCES user(id));"
       );
 
       statement.executeUpdate("drop table if exists chat_members");
@@ -53,14 +53,14 @@ public class DatabaseConnector {
     return null;
   }
 
-  public static boolean executeDml(String sql) {
+  public static ResultSet executeDml(String sql) {
     try (Connection connection = DriverManager.getConnection(DATABASE_URL)) {
       Statement statement = connection.createStatement();
       statement.execute(sql);
-      return true;
+      return statement.getResultSet();
     } catch (Exception e) {
       e.printStackTrace(System.err);
-      return false;
     }
+    return null;
   }
 }
