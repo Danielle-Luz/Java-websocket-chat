@@ -19,16 +19,20 @@
 
 .new-chat-button {
   align-items: center;
-  background-color: var(--color-grey-200);
-  border: 1px solid var(--color-primary);
-  border-radius: var(--radius-pill);
+  border: 2px solid var(--color-grey-200);
+  border-radius: var(--radius-square);
   color: var(--color-primary);
   display: flex;
   font-weight: bold;
   gap: 15px;
   margin: 0 20px;
   padding: 5px 10px;
+  transition: 0.3s;
   width: calc(100% - 45px);
+}
+
+.new-chat-button:hover {
+  background-color: var(--color-grey-200);
 }
 
 .all-chats-container {
@@ -166,4 +170,9 @@
   gap: 10px;
   height: fit-content;
   padding: 10px 15px;
+  transition: 0.3s;
+}
+
+.send-message-button:hover {
+  background-color: var(--color-primary-darker);
 }
