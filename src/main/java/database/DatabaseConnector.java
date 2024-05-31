@@ -2,15 +2,16 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseConnector {
 
-  private static final String databaseUrl = "jdbc:sqlite:easychat.db";
+  private static final String DATABASE_URL = "jdbc:sqlite:easychat.db";
 
   public static void createTables() {
-    try (Connection connection = DriverManager.getConnection(databaseUrl)) {
+    try (Connection connection = DriverManager.getConnection(DATABASE_URL)) {
       Statement statement = connection.createStatement();
 
       statement.setQueryTimeout(30);
@@ -36,6 +37,30 @@ public class DatabaseConnector {
       );
     } catch (SQLException e) {
       e.printStackTrace(System.err);
+    }
+  }
+
+  public static ResultSet executeQuery(String sql) {
+    try (Connection connection = DriverManager.getConnection(DATABASE_URL)) {
+      Statement statement = connection.createStatement();
+      ResultSet queryResults = statement.executeQuery(sql);
+
+      return queryResults;
+    } catch (Exception e) {
+      e.printStackTrace(System.err);
+    }
+
+    return null;
+  }
+
+  public static boolean executeDml(String sql) {
+    try (Connection connection = DriverManager.getConnection(DATABASE_URL)) {
+      Statement statement = connection.createStatement();
+      statement.execute(sql);
+      return true;
+    } catch (Exception e) {
+      e.printStackTrace(System.err);
+      return false;
     }
   }
 }
