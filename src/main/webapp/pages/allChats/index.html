@@ -7,6 +7,7 @@
     <title>Easychat</title>
     <link rel="stylesheet" href="./index.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/global.css" type="text/css" />
+    <link rel="stylesheet" href="./../../styles/modal.css" type="text/css" />
     <script src="./index.js" type="text/javascript" defer></script>
     <script
       src="./../../scripts/autoResizeTextarea.js"
@@ -15,6 +16,26 @@
     ></script>
   </head>
   <body class="content-container">
+    <div class="modal-external-container">
+      <div class="modal-container">
+        <button class="close-modal-button">
+          <img
+            class="close-modal-button-icon"
+            src="https://img.icons8.com/ios/50/fefefe/cancel.png"
+            alt="cancel"
+          />
+        </button>
+        <article class="modal">
+          <h2 class="modal-title">New chat</h2>
+          <input
+            class="modal-input"
+            type="text"
+            placeholder="Type the chat name..."
+          />
+          <button class="modal-button">Create chat</button>
+        </article>
+      </div>
+    </div>
     <aside class="all-chats-wrapper">
       <button class="new-chat-button">
         <img
@@ -61,10 +82,16 @@
     <main class="current-chat-container">
       <section class="current-chat-content">
         <article class="new-chat-message-container">
-          <p class="new-chat-message-text">catarro roxo branco acerola cozida marionete papagaio lupa bola basquete tucano lúcida uberaba malemolência escrevin errado</p>
+          <p class="new-chat-message-text">
+            catarro roxo branco acerola cozida marionete papagaio lupa bola
+            basquete tucano lúcida uberaba malemolência escrevin errado
+          </p>
         </article>
         <article class="new-chat-message-container another-user-message">
-          <p class="new-chat-message-text ">catarro roxo branco acerola cozida marionete papagaio lupa bola basquete tucano lúcida uberaba malemolência escrevin errado</p>
+          <p class="new-chat-message-text">
+            catarro roxo branco acerola cozida marionete papagaio lupa bola
+            basquete tucano lúcida uberaba malemolência escrevin errado
+          </p>
         </article>
       </section>
       <section class="message-external-wrapper">

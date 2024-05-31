@@ -5,12 +5,13 @@
   --color-grey-200: #e9eaf4;
   --color-grey-300: #fefefe;
 
+  --color-low-opacity: #0000009c;
+
   --color-primary: #004efc;
   --color-primary-lighter: #add6f7;
   --color-primary-darker: #0035a7;
   --color-secondary: #172237;
   --color-terciary: #e55956;
-
 
   --font-size-title-normal: 1rem;
   --font-size-text-big: 1.2rem;
@@ -31,7 +32,6 @@
 body {
   background-color: var(--color-grey-300);
   height: 100vh;
-  padding: 20px 0;
   width: 100%;
 }
 
