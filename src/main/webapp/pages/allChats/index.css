@@ -90,7 +90,15 @@
   flex-grow: 1;
 }
 
+.message-external-wrapper {
+  background-color: var(--color-grey-200);
+  bottom: 0;
+  padding: 20px 0 0;
+  position: sticky;
+}
+
 .message-container {
+  align-items: center;
   background-color: var(--color-grey-300);
   border-radius: var(--radius-square);
   display: flex;
@@ -100,7 +108,14 @@
 }
 
 .type-message {
+  background-color: transparent;
+  border: none;
+  caret-color: var(--message-text-color);
+  color: var(--message-text-color);
   flex-grow: 1;
+  font-size: var(--font-size-text-normal);
+  max-height: 180px;
+  padding-left: 10px;
 }
 
 .send-message-button-icon {
@@ -119,5 +134,6 @@
   border-radius: var(--radius-square);
   display: flex;
   gap: 10px;
+  height: fit-content;
   padding: 10px 15px;
 }
