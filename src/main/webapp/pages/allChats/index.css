@@ -59,7 +59,7 @@
 
 .selected-chat {
   background-color: var(--color-grey-200);
-  border-left: 4px solid var(--color-terciary);
+  border-left: 4px solid var(--color-primary);
 }
 
 .selected-chat + .all-chats-list-item {
@@ -79,7 +79,45 @@
 
 .current-chat-container {
   background-color: var(--color-grey-200);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-square);
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
   margin-right: 20px;
+}
+
+.current-chat-content {
+  flex-grow: 1;
+}
+
+.message-container {
+  background-color: var(--color-grey-300);
+  border-radius: var(--radius-square);
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  margin: 0 20px 20px;
+}
+
+.type-message {
+  flex-grow: 1;
+}
+
+.send-message-button-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.send-message-button-text {
+  color: var(--color-grey-300);
+  font-weight: 600;
+}
+
+.send-message-button {
+  align-items: center;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-square);
+  display: flex;
+  gap: 10px;
+  padding: 10px 15px;
 }
