@@ -2,6 +2,7 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -54,10 +55,14 @@ public class DatabaseConnector {
   }
 
   public static ResultSet executeDml(String sql) {
-    try (Connection connection = DriverManager.getConnection(DATABASE_URL)) {
-      Statement statement = connection.createStatement();
-      statement.execute(sql);
-      return statement.getResultSet();
+    try {
+      Connection connection = DriverManager.getConnection(DATABASE_URL);
+      PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+      statement.executeUpdate();
+
+      ResultSet dmlResult = statement.getGeneratedKeys();
+      dmlResult.next();
+      return dmlResult;
     } catch (Exception e) {
       e.printStackTrace(System.err);
     }

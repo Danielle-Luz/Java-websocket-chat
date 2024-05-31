@@ -7,9 +7,13 @@ import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.webresources.DirResourceSet;
 import org.apache.catalina.webresources.StandardRoot;
 
+import database.DatabaseConnector;
+
 public class ServerStarter {
 
   public static void main(String[] args) throws Exception {
+    DatabaseConnector.createTables();
+    
     String webappDirLocation = "src/main/webapp/";
     Tomcat tomcat = new Tomcat();
     tomcat.setPort(8080);

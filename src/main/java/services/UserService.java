@@ -1,8 +1,9 @@
 package services;
 
-import database.DatabaseConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import database.DatabaseConnector;
 import models.User;
 import utils.EncryptUtils;
 
@@ -19,11 +20,12 @@ public class UserService {
       );
 
       ResultSet createdRow = DatabaseConnector.executeDml(insertUserQuery);
+      int userId = createdRow.getInt(1);
 
       return new User(
-        createdRow.getInt("id"),
-        createdRow.getString("username"),
-        createdRow.getString("password")
+        userId,
+        username,
+        encryptedPassword
       );
     } catch (SQLException e) {
       e.printStackTrace(System.err);
