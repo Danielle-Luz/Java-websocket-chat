@@ -12,6 +12,8 @@ public class EncryptUtils {
     String comparedValue,
     String encryptedValue
   ) {
-    return BCrypt.checkpw(comparedValue, encryptedValue);
+    return encryptedValue != null
+      ? BCrypt.checkpw(comparedValue, encryptedValue)
+      : false;
   }
 }

@@ -20,7 +20,9 @@
      String statusCode = request.getParameter("statusCode");
       if(statusCode != null) {
         String toastMessage = statusCode.equals("201") ? 
-          "Your user was created!" : 
+          "Your user was created!" :
+          statusCode.equals("401") ? 
+          "Invalid credentials" :
           "An error occurred while trying to login";
         String toastIconUrl = statusCode.equals("201") ? 
           "https://img.icons8.com/ios/50/20C997/ok--v1.png" : 

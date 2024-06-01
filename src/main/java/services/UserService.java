@@ -1,5 +1,6 @@
 package services;
 
+import java.io.IOException;
 import java.security.Key;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,9 +47,9 @@ public class UserService {
       } else {
         response.setStatus(500);
         response
-        .getWriter()
-        .write(
-          "{\"message\": \"An error ocurred and the user was not created\"}"
+          .getWriter()
+          .write(
+            "{\"message\": \"An error ocurred and the user was not created\"}"
           );
         response.sendRedirect("/views/createUser/index.jsp?statusCode=500");
       }
@@ -57,8 +58,14 @@ public class UserService {
     }
   }
 
-  public static JSONObject login(String username, String password) {
+  public static JSONObject login(
+    HttpServletRequest request,
+    HttpServletResponse response
+  ) throws IOException {
     try {
+      String username = request.getParameter("username");
+      String password = request.getParameter("password");
+
       String userByUsernameQuery = String.format(
         "SELECT id, password FROM user WHERE username = '%s'",
         username
@@ -78,7 +85,10 @@ public class UserService {
         token.put("token", generateToken(foundUserId));
         return token;
       }
+
+      response.sendRedirect("/views/login/index.jsp?statusCode=401");
     } catch (SQLException e) {
+      response.sendRedirect("/views/login/index.jsp?statusCode=500");
       e.printStackTrace(System.err);
     }
 
