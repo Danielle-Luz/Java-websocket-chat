@@ -4,16 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Easychat</title>
+    <title>Easychat | Create user</title>
     <link rel="stylesheet" href="./index.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/global.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/buttons.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/inputs.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/modal.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/forms.css" type="text/css" />
+    <link rel="stylesheet" href="./../../styles/toasts.css" type="text/css" />
     <script src="./index.js" type="text/javascript" defer></script>
   </head>
   <body class="content-container">
+    <article class="toast hidden-toast">
+      <img class="toast-icon" src="https://img.icons8.com/ios/50/20C997/ok--v1.png" alt="ok--v1"/>
+      <h2 class="toast-title">Your user was created!</h2>
+    </article>
     <main class="form-external-container">
       <div class="form-container">
         <article class="text-container">
@@ -31,7 +36,7 @@
             <label class="input-label" for="password">Password</label>
             <input class="input-2" id="password" name="password" type="text" class="" placeholder="Type your password..." />
           </fieldset>
-          <input class="primary-button" type="submit" value="Register" />
+          <input class="primary-button register-button" type="submit" value="Register" />
         </form>
       </div>
     </main>

@@ -13,8 +13,8 @@
   --color-secondary: #172237;
   --color-terciary: #e55956;
 
-  --font-size-title-normal: 1rem;
   --font-size-title-big: 1.2rem;
+  --font-size-title-normal: 1rem;
   --font-size-text-normal: 0.875rem;
 
   --radius-pill: 20px;
@@ -43,6 +43,10 @@ button {
 
 input {
   border: none;
+}
+
+input[type="submit"] {
+  cursor: pointer;
 }
 
 textarea {

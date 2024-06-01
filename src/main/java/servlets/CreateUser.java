@@ -1,11 +1,13 @@
 package servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import models.User;
 import services.UserService;
 
@@ -28,6 +30,8 @@ public class CreateUser extends HttpServlet {
     response.setStatus(201);
     response.setContentType("application/json");
     response.setCharacterEncoding("UTF-8");
-    response.getWriter().write(createdUser.getJson().toString());
+    response.getWriter().println(createdUser.getJson().toString());
+
+    response.sendRedirect("/views/login");
   }
 }
