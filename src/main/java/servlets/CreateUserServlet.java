@@ -12,7 +12,7 @@ import models.User;
 import services.UserService;
 
 @WebServlet("/createUser")
-public class CreateUser extends HttpServlet {
+public class CreateUserServlet extends HttpServlet {
 
   public void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {

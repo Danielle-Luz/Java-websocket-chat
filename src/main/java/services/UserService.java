@@ -1,9 +1,13 @@
 package services;
 
+import java.security.Key;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import database.DatabaseConnector;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import models.User;
 import utils.EncryptUtils;
 
@@ -22,11 +26,7 @@ public class UserService {
       ResultSet createdRow = DatabaseConnector.executeDml(insertUserQuery);
       int userId = createdRow.getInt(1);
 
-      return new User(
-        userId,
-        username,
-        encryptedPassword
-      );
+      return new User(userId, username, encryptedPassword);
     } catch (SQLException e) {
       e.printStackTrace(System.err);
       return null;
@@ -60,5 +60,17 @@ public class UserService {
       e.printStackTrace(System.err);
       return null;
     }
+  }
+
+  public String generateToken(String username) {
+    Key secretKey = Keys.secretKeyFor(io.jsonwebtoken.SignatureAlgorithm.HS256);
+    Date expirationDate = new Date(System.currentTimeMillis() + 3600000);
+
+    return Jwts
+      .builder()
+      .subject(username)
+      .expiration(expirationDate)
+      .signWith(secretKey)
+      .compact();
   }
 }
