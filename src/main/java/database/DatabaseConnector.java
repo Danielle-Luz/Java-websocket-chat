@@ -19,7 +19,7 @@ public class DatabaseConnector {
 
       statement.executeUpdate("drop table if exists user");
       statement.executeUpdate(
-        "CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR NOT NULL, password VARCHAR NOT NULL);"
+        "CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR NOT NULL UNIQUE, password VARCHAR NOT NULL);"
       );
 
       statement.executeUpdate("drop table if exists chat");
@@ -56,18 +56,16 @@ public class DatabaseConnector {
     return null;
   }
 
-  public static ResultSet executeDml(String sql) {
-    try {
-      Connection connection = DriverManager.getConnection(DATABASE_URL);
-      PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-      statement.executeUpdate();
+  public static ResultSet executeDml(String sql) throws SQLException {
+    Connection connection = DriverManager.getConnection(DATABASE_URL);
+    PreparedStatement statement = connection.prepareStatement(
+      sql,
+      PreparedStatement.RETURN_GENERATED_KEYS
+    );
+    statement.executeUpdate();
 
-      ResultSet dmlResult = statement.getGeneratedKeys();
-      dmlResult.next();
-      return dmlResult;
-    } catch (Exception e) {
-      e.printStackTrace(System.err);
-    }
-    return null;
+    ResultSet dmlResult = statement.getGeneratedKeys();
+    dmlResult.next();
+    return dmlResult;
   }
 }

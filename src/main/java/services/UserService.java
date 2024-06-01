@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONObject;
 
 import database.DatabaseConnector;
@@ -15,8 +18,14 @@ import utils.EncryptUtils;
 
 public class UserService {
 
-  public static User createUser(String username, String password) {
+  public static User createUser(
+    HttpServletRequest request,
+    HttpServletResponse response
+  ) throws java.io.IOException {
     try {
+      String username = request.getParameter("username");
+      String password = request.getParameter("password");
+
       String encryptedPassword = EncryptUtils.encryptValue(password);
 
       String insertUserQuery = String.format(
@@ -29,7 +38,20 @@ public class UserService {
       int userId = createdRow.getInt(1);
 
       return new User(userId, username, encryptedPassword);
-    } catch (SQLException e) {
+    } catch (Exception e) {
+      if (e.getMessage().contains("SQLITE_CONSTRAINT_UNIQUE")) {
+        response.setStatus(409);
+        response.getWriter().write("{\"message\": \"Username already taken\"}");
+        response.sendRedirect("/views/createUser/index.jsp?statusCode=409");
+      } else {
+        response.setStatus(500);
+        response
+        .getWriter()
+        .write(
+          "{\"message\": \"An error ocurred and the user was not created\"}"
+          );
+        response.sendRedirect("/views/createUser/index.jsp?statusCode=500");
+      }
       e.printStackTrace(System.err);
       return null;
     }

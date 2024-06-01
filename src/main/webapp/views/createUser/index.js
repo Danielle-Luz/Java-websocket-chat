@@ -1,17 +1,18 @@
-(function showToastOnSubmitForm() {
-  const form = document.querySelector(".form");
+(function enableRegisterButtonOnFillAllInputs() {
+  const areAllInputFilled = false;
+  const inputs = document.querySelectorAll("input");
   const registerButton = document.querySelector(".register-button");
+  let filledInputNumber = 0;
 
-  form.addEventListener("submit", (event) => {
-    const toast = document.querySelector(".toast");
+  inputs.forEach(input => {
+    input.addEventListener("input", () => {
+      const areAllInputsFilled = Array.from(inputs).every(input => input.value !== "");
 
-    registerButton.setAttribute("disabled", true);
-
-    if(toast.classList.contains("hidden-toast")) {
-      toast.classList.remove("hidden-toast");
-      event.preventDefault();
-    }
-
-    setTimeout(() => form.submit(), 3000);
+      if(areAllInputsFilled) {
+        registerButton.removeAttribute("disabled");
+      } else {
+        registerButton.setAttribute("disabled", true);
+      }
+    });
   })
 })();

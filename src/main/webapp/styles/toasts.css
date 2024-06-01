@@ -11,13 +11,32 @@
   padding: 20px 50px;
   top: 0;
   transition: 0.5s;
-  animation-name: example;
+  animation-name: showToast;
   animation-duration: 1s;
 }
 
-@keyframes example {
-  from {top: -50px;}
-  to {top: 0}
+@keyframes showToast {
+  from {
+    top: -50px;
+  }
+  to {
+    top: 0;
+  }
+}
+
+.hide-toast {
+  animation-name: hideToast;
+  animation-duration: 3s;
+  top: -500px;
+}
+
+@keyframes hideToast {
+  from {
+    top: 0;
+  }
+  to {
+    top: -500px;
+  }
 }
 
 .toast-icon {
@@ -28,8 +47,4 @@
 .toast-title {
   font-size: var(--font-size-text-normal);
   font-weight: 600;
-}
-
-.hidden-toast {
-  display: none;
 }

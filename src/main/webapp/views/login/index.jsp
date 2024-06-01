@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Easychat | Create user</title>
+    <title>Easychat | Login</title>
     <link rel="stylesheet" href="./index.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/global.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/buttons.css" type="text/css" />
@@ -13,30 +13,36 @@
     <link rel="stylesheet" href="./../../styles/forms.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/toasts.css" type="text/css" />
     <script src="./index.js" type="text/javascript" defer></script>
+    <script src="./../../scripts/hideToast.js" type="text/javascript" defer></script>
   </head>
   <body class="content-container">
-    <article class="toast hidden-toast">
-      <img class="toast-icon" src="https://img.icons8.com/ios/50/20C997/ok--v1.png" alt="ok--v1"/>
-      <h2 class="toast-title">Your user was created!</h2>
-    </article>
+    <%
+      String statusCode = request.getParameter("statusCode");
+      if(statusCode != null && statusCode.equals("201")) {
+        out.println("<article class=\"toast\"><img class=\"toast-icon\" src=\"https://img.icons8.com/ios/50/20C997/ok--v1.png\" alt=\"Confirm icon\"/><h2 class=\"toast-title\">Your user was created!</h2></article>");
+      }
+    %>
     <main class="form-external-container">
       <div class="form-container">
         <article class="text-container">
-          <h2 class="form-title">New user</h2>
+          <h2 class="form-title">Login</h2>
           <p class="form-description">
-            Fill the fields below to start chatting!
+            If you are registered, fill the info bellow
           </p>
         </article>
-        <form class="form" action="/createUser" method="POST">
+        <form class="form" action="/login" method="POST">
           <fieldset class="input-container">
             <label class="input-label" for="username">Username</label>
             <input class="input-2" id="username" name="username" type="text" class="" placeholder="Type your username..." />
           </fieldset>
           <fieldset class="input-container">
             <label class="input-label" for="password">Password</label>
-            <input class="input-2" id="password" name="password" type="text" class="" placeholder="Type your password..." />
+            <input class="input-2" id="password" name="password" type="password" class="" placeholder="Type your password..." />
           </fieldset>
-          <input class="primary-button register-button" type="submit" value="Register" />
+          <div class="button-group">
+            <input class="primary-button" type="submit" value="Login" />
+            <a href="/views/createUser" class="terciary-button" type="button">Register</a>
+          </div>
         </form>
       </div>
     </main>
