@@ -61,7 +61,7 @@ public class UserService {
     return null;
   }
 
-  public static String generateToken(String username) {
+  private static String generateToken(String username) {
     Key secretKey = Keys.secretKeyFor(io.jsonwebtoken.SignatureAlgorithm.HS256);
     Date expirationDate = new Date(System.currentTimeMillis() + 3600000);
 

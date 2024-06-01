@@ -23,7 +23,10 @@ public class LoginServlet extends HttpServlet {
 
     if (token == null) {
       response.sendError(401);
-      response.getWriter().println("{message: \"Invalid login credentials\"}");
+      response
+        .getWriter()
+        .println("{\"message\": \"Invalid login credentials\"}");
+        
       return;
     }
 
