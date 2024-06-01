@@ -1,19 +1,15 @@
 package services;
 
+import database.DatabaseConnector;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import java.io.IOException;
 import java.security.Key;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.json.JSONObject;
-
-import database.DatabaseConnector;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
 import models.User;
 import utils.EncryptUtils;
 
@@ -58,7 +54,7 @@ public class UserService {
     }
   }
 
-  public static JSONObject login(
+  public static String login(
     HttpServletRequest request,
     HttpServletResponse response
   ) throws IOException {
@@ -81,9 +77,7 @@ public class UserService {
       );
 
       if (isProvidedPasswordValid) {
-        JSONObject token = new JSONObject();
-        token.put("token", generateToken(foundUserId));
-        return token;
+        return generateToken(foundUserId);
       }
 
       response.sendRedirect("/views/login/index.jsp?statusCode=401");

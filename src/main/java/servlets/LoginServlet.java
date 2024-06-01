@@ -5,8 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.json.JSONObject;
+import javax.servlet.http.HttpSession;
 
 import services.UserService;
 
@@ -15,7 +14,7 @@ public class LoginServlet extends HttpServlet {
 
   public void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, java.io.IOException {
-    JSONObject token = UserService.login(request, response);
+    String token = UserService.login(request, response);
 
     response.setContentType("application/json");
     response.setCharacterEncoding("UTF-8");
@@ -24,8 +23,9 @@ public class LoginServlet extends HttpServlet {
       return;
     }
 
-    response.setStatus(200);
-    response.getWriter().println(token.toString());
-    response.sendRedirect("/views/allChats");
+    HttpSession session = request.getSession();
+    session.setAttribute("token", token);
+
+    response.sendRedirect("/allChats");
   }
 }

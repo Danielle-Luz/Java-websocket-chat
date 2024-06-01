@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Easychat</title>
-    <link rel="stylesheet" href="./index.css" type="text/css" />
+    <link rel="stylesheet" href="./../../views/allChats/index.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/global.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/buttons.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/inputs.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/modal.css" type="text/css" />
-    <script src="./index.js" type="text/javascript" defer></script>
+    <script src="./../../views/allChats/index.js" type="text/javascript" defer></script>
     <script
       src="./../../scripts/autoResizeTextarea.js"
       type="text/javascript"
