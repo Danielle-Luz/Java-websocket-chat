@@ -26,11 +26,12 @@ public class LoginServlet extends HttpServlet {
       response
         .getWriter()
         .println("{\"message\": \"Invalid login credentials\"}");
-        
+
       return;
     }
 
     response.setStatus(200);
     response.getWriter().println(token.toString());
+    response.sendRedirect("/views/allChats");
   }
 }
