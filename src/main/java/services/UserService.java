@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+import org.json.JSONObject;
+
 import database.DatabaseConnector;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -33,7 +35,7 @@ public class UserService {
     }
   }
 
-  public static String login(String username, String password) {
+  public static JSONObject login(String username, String password) {
     try {
       String userByUsernameQuery = String.format(
         "SELECT * FROM user WHERE username = '%s'",
@@ -48,12 +50,14 @@ public class UserService {
       );
 
       if (isProvidedPasswordValid) {
-        return generateToken(username);
+        JSONObject token = new JSONObject();
+        token.put("token", generateToken(username));
+        return token;
       }
     } catch (SQLException e) {
       e.printStackTrace(System.err);
     }
-    
+
     return null;
   }
 
