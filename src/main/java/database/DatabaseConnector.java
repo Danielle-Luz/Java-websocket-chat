@@ -42,9 +42,11 @@ public class DatabaseConnector {
   }
 
   public static ResultSet executeQuery(String sql) {
-    try (Connection connection = DriverManager.getConnection(DATABASE_URL)) {
+    try {
+      Connection connection = DriverManager.getConnection(DATABASE_URL);
       Statement statement = connection.createStatement();
       ResultSet queryResults = statement.executeQuery(sql);
+      queryResults.next();
 
       return queryResults;
     } catch (Exception e) {

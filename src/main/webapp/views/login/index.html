@@ -22,7 +22,7 @@
             If you are registered, fill the info bellow
           </p>
         </article>
-        <form class="form">
+        <form class="form" action="/login" method="POST">
           <fieldset class="input-container">
             <label class="input-label" for="username">Username</label>
             <input class="input-2" id="username" name="username" type="text" class="" placeholder="Type your username..." />
@@ -33,7 +33,7 @@
           </fieldset>
           <div class="button-group">
             <input class="primary-button" type="submit" value="Login" />
-            <button class="terciary-button">Register</button>
+            <a href="/views/createUser" class="terciary-button" type="button">Register</a>
           </div>
         </form>
       </div>

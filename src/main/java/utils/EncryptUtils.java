@@ -9,8 +9,8 @@ public class EncryptUtils {
   }
 
   public static boolean isValueEqualToEncrypted(
-    String encryptedValue,
-    String comparedValue
+    String comparedValue,
+    String encryptedValue
   ) {
     return BCrypt.checkpw(comparedValue, encryptedValue);
   }

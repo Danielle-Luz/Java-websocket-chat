@@ -38,20 +38,22 @@ public class UserService {
   public static JSONObject login(String username, String password) {
     try {
       String userByUsernameQuery = String.format(
-        "SELECT * FROM user WHERE username = '%s'",
+        "SELECT id, password FROM user WHERE username = '%s'",
         username
       );
 
       ResultSet foundUser = DatabaseConnector.executeQuery(userByUsernameQuery);
+      String foundUserId = foundUser.getString("id");
+      String foundUserEncryptedPassword = foundUser.getString("password");
 
       boolean isProvidedPasswordValid = EncryptUtils.isValueEqualToEncrypted(
         password,
-        foundUser.getString("password")
+        foundUserEncryptedPassword
       );
 
       if (isProvidedPasswordValid) {
         JSONObject token = new JSONObject();
-        token.put("token", generateToken(username));
+        token.put("token", generateToken(foundUserId));
         return token;
       }
     } catch (SQLException e) {
