@@ -33,7 +33,7 @@ public class UserService {
     }
   }
 
-  public static User login(String username, String password) {
+  public static String login(String username, String password) {
     try {
       String userByUsernameQuery = String.format(
         "SELECT * FROM user WHERE username = '%s'",
@@ -48,21 +48,16 @@ public class UserService {
       );
 
       if (isProvidedPasswordValid) {
-        return new User(
-          foundUser.getInt("id"),
-          foundUser.getString("username"),
-          foundUser.getString("password")
-        );
-      } else {
-        return null;
+        return generateToken(username);
       }
     } catch (SQLException e) {
       e.printStackTrace(System.err);
-      return null;
     }
+    
+    return null;
   }
 
-  public String generateToken(String username) {
+  public static String generateToken(String username) {
     Key secretKey = Keys.secretKeyFor(io.jsonwebtoken.SignatureAlgorithm.HS256);
     Date expirationDate = new Date(System.currentTimeMillis() + 3600000);
 
