@@ -9,5 +9,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Chat {
   private String id;
+  private String name;
   private int creatorId;
 }

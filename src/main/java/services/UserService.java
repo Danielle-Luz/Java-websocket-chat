@@ -1,19 +1,25 @@
 package services;
 
-import database.DatabaseConnector;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
 import java.io.IOException;
 import java.security.Key;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Date;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import database.DatabaseConnector;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import models.User;
 import utils.EncryptUtils;
 
 public class UserService {
+
+  private static final Key SECRET_KEY = Keys.secretKeyFor(
+    io.jsonwebtoken.SignatureAlgorithm.HS256
+  );
 
   public static User createUser(
     HttpServletRequest request,
@@ -31,8 +37,7 @@ public class UserService {
         encryptedPassword
       );
 
-      ResultSet createdRow = DatabaseConnector.executeDml(insertUserQuery);
-      int userId = createdRow.getInt(1);
+      int userId = (Integer) DatabaseConnector.executeDml(insertUserQuery);
 
       return new User(userId, username, encryptedPassword);
     } catch (Exception e) {
@@ -58,46 +63,54 @@ public class UserService {
     HttpServletRequest request,
     HttpServletResponse response
   ) throws IOException {
-    try {
-      String username = request.getParameter("username");
-      String password = request.getParameter("password");
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
 
-      String userByUsernameQuery = String.format(
-        "SELECT id, password FROM user WHERE username = '%s'",
-        username
-      );
+    String userByUsernameQuery = String.format(
+      "SELECT id, password FROM user WHERE username = '%s'",
+      username
+    );
 
-      ResultSet foundUser = DatabaseConnector.executeQuery(userByUsernameQuery);
-      String foundUserId = foundUser.getString("id");
-      String foundUserEncryptedPassword = foundUser.getString("password");
+    Map<String, Object> foundUserMap = DatabaseConnector
+      .executeQuery(userByUsernameQuery)
+      .get(0);
 
-      boolean isProvidedPasswordValid = EncryptUtils.isValueEqualToEncrypted(
-        password,
-        foundUserEncryptedPassword
-      );
+    String foundUserId = foundUserMap.get("id").toString();
+    String foundUserEncryptedPassword = (String) foundUserMap.get("password");
 
-      if (isProvidedPasswordValid) {
-        return generateToken(foundUserId);
-      }
+    boolean isProvidedPasswordValid = EncryptUtils.isValueEqualToEncrypted(
+      password,
+      foundUserEncryptedPassword
+    );
 
-      response.sendRedirect("/views/login/index.jsp?statusCode=401");
-    } catch (SQLException e) {
-      response.sendRedirect("/views/login/index.jsp?statusCode=500");
-      e.printStackTrace(System.err);
+    if (isProvidedPasswordValid) {
+      return generateToken(foundUserId);
     }
+
+    response.sendRedirect("/views/login/index.jsp?statusCode=401");
 
     return null;
   }
 
-  private static String generateToken(String username) {
-    Key secretKey = Keys.secretKeyFor(io.jsonwebtoken.SignatureAlgorithm.HS256);
+  private static String generateToken(String storedValue) {
     Date expirationDate = new Date(System.currentTimeMillis() + 3600000);
 
     return Jwts
       .builder()
-      .subject(username)
+      .subject(storedValue)
       .expiration(expirationDate)
-      .signWith(secretKey)
+      .signWith(SECRET_KEY)
       .compact();
+  }
+
+  public static String validateTokenAndGetSubject(String token) {
+    Claims claims = Jwts
+      .parser()
+      .setSigningKey(SECRET_KEY)
+      .build()
+      .parseClaimsJws(token)
+      .getBody();
+
+    return claims.getSubject();
   }
 }

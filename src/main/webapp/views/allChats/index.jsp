@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -27,16 +28,18 @@
             alt="cancel"
           />
         </button>
-        <article class="modal">
+        <form class="modal" action="/chat" method="POST">
           <h2 class="modal-title">New chat</h2>
           <input
             id="modal-input"
+            id="chatname"
+            name="chatName"
             class="input-2"
             type="text"
             placeholder="Type the chat name..."
           />
           <button class="primary-button">Create chat</button>
-        </article>
+        </form>
       </div>
     </div>
     <aside class="all-chats-wrapper">
@@ -50,36 +53,42 @@
       </button>
       <section class="all-chats-container">
         <h2 class="all-chats-title">All chats</h2>
-        <ul class="all-chats-list">
-          <li class="all-chats-list-item">
-            <h3 class="chat-name">Chat 1</h3>
-            <p class="chat-last-message">Last message</p>
-          </li>
-          <li class="all-chats-list-item">
-            <h3 class="chat-name">Chat 1</h3>
-            <p class="chat-last-message">Last message</p>
-          </li>
-          <li class="all-chats-list-item">
-            <h3 class="chat-name">Chat 1</h3>
-            <p class="chat-last-message">Last message</p>
-          </li>
-          <li class="all-chats-list-item">
-            <h3 class="chat-name">Chat 1</h3>
-            <p class="chat-last-message">Last message</p>
-          </li>
-          <li class="all-chats-list-item">
-            <h3 class="chat-name">Chat 1</h3>
-            <p class="chat-last-message">Last message</p>
-          </li>
-          <li class="all-chats-list-item selected-chat">
-            <h3 class="chat-name">Chat 1</h3>
-            <p class="chat-last-message">Last message</p>
-          </li>
-          <li class="all-chats-list-item">
-            <h3 class="chat-name">Chat 1</h3>
-            <p class="chat-last-message">Last message</p>
-          </li>
-        </ul>
+        <% 
+          if(true) {
+        %>
+          <p>vazio</p>
+        <% } else { %>
+          <ul class="all-chats-list">
+            <li class="all-chats-list-item">
+              <h3 class="chat-name">Chat 1</h3>
+              <p class="chat-last-message">Last message</p>
+            </li>
+            <li class="all-chats-list-item">
+              <h3 class="chat-name">Chat 1</h3>
+              <p class="chat-last-message">Last message</p>
+            </li>
+            <li class="all-chats-list-item">
+              <h3 class="chat-name">Chat 1</h3>
+              <p class="chat-last-message">Last message</p>
+            </li>
+            <li class="all-chats-list-item">
+              <h3 class="chat-name">Chat 1</h3>
+              <p class="chat-last-message">Last message</p>
+            </li>
+            <li class="all-chats-list-item">
+              <h3 class="chat-name">Chat 1</h3>
+              <p class="chat-last-message">Last message</p>
+            </li>
+            <li class="all-chats-list-item selected-chat">
+              <h3 class="chat-name">Chat 1</h3>
+              <p class="chat-last-message">Last message</p>
+            </li>
+            <li class="all-chats-list-item">
+              <h3 class="chat-name">Chat 1</h3>
+              <p class="chat-last-message">Last message</p>
+            </li>
+          </ul>
+        <% } %>
       </section>
     </aside>
     <main class="current-chat-container">
