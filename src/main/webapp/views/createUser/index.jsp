@@ -18,8 +18,12 @@
   <body class="content-container">
     <%
       String statusCode = request.getParameter("statusCode");
-      if(statusCode != null && statusCode.equals("409")) {
-        out.println("<article class=\"toast\"><img class=\"toast-icon\" src=\"https://img.icons8.com/material-outlined/24/FA5252/cancel--v1.png\" alt=\"Cancel icon\"/><h2 class=\"toast-title\">This user name was already taken</h2></article>");
+      if(statusCode != null) {
+        String toastMessage = statusCode.equals("409") ? 
+          "This user name was already taken" : 
+          "An error occurred while trying to create your user";
+
+        out.println("<article class=\"toast\"><img class=\"toast-icon\" src=\"https://img.icons8.com/material-outlined/24/FA5252/cancel--v1.png\" alt=\"Cancel icon\"/><h2 class=\"toast-title\">" + toastMessage +"</h2></article>");
       }
     %>
     <main class="form-external-container">

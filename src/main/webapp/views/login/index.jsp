@@ -17,9 +17,16 @@
   </head>
   <body class="content-container">
     <%
-      String statusCode = request.getParameter("statusCode");
-      if(statusCode != null && statusCode.equals("201")) {
-        out.println("<article class=\"toast\"><img class=\"toast-icon\" src=\"https://img.icons8.com/ios/50/20C997/ok--v1.png\" alt=\"Confirm icon\"/><h2 class=\"toast-title\">Your user was created!</h2></article>");
+     String statusCode = request.getParameter("statusCode");
+      if(statusCode != null) {
+        String toastMessage = statusCode.equals("201") ? 
+          "Your user was created!" : 
+          "An error occurred while trying to login";
+        String toastIconUrl = statusCode.equals("201") ? 
+          "https://img.icons8.com/ios/50/20C997/ok--v1.png" : 
+          "https://img.icons8.com/material-outlined/24/FA5252/cancel--v1.png";
+          
+        out.println("<article class=\"toast\"><img class=\"toast-icon\" src=\"" + toastIconUrl +"\" alt=\"Confirm icon\"/><h2 class=\"toast-title\">"+ toastMessage +"</h2></article>");
       }
     %>
     <main class="form-external-container">
