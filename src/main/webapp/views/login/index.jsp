@@ -43,14 +43,14 @@
         <form class="form" action="/login" method="POST">
           <fieldset class="input-container">
             <label class="input-label" for="username">Username</label>
-            <input class="input-2" id="username" name="username" type="text" class="" placeholder="Type your username..." />
+            <input class="input-2" id="username" name="username" type="text" class="" placeholder="Type your username..." autocomplete="off" />
           </fieldset>
           <fieldset class="input-container">
             <label class="input-label" for="password">Password</label>
-            <input class="input-2" id="password" name="password" type="password" class="" placeholder="Type your password..." />
+            <input class="input-2" id="password" name="password" type="password" class="" placeholder="Type your password..." autocomplete="off" />
           </fieldset>
           <div class="button-group">
-            <input class="primary-button" type="submit" value="Login" />
+            <input class="primary-button" type="submit" value="Login" autocomplete="off" />
             <a href="/views/createUser" class="terciary-button" type="button">Register</a>
           </div>
         </form>

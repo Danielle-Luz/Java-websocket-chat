@@ -44,7 +44,8 @@
               name="username"
               type="text"
               class=""
-              placeholder="Type your username..."
+              placeholder="Type your username..."  
+              autocomplete="off"
             />
           </fieldset>
           <fieldset class="input-container">
@@ -56,6 +57,7 @@
               type="password"
               class=""
               placeholder="Type your password..."
+              autocomplete="off"
             />
           </fieldset>
           <input
@@ -63,6 +65,7 @@
             type="submit"
             value="Register"
             disabled="true"
+            autocomplete="off"
           />
         </form>
       </div>
