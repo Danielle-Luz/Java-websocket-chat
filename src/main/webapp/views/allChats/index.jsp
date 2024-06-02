@@ -88,18 +88,6 @@
     </aside>
     <main class="current-chat-container">
       <section class="current-chat-content">
-        <article class="new-chat-message-container">
-          <p class="new-chat-message-text">
-            catarro roxo branco acerola cozida marionete papagaio lupa bola
-            basquete tucano lúcida uberaba malemolência escrevin errado
-          </p>
-        </article>
-        <article class="new-chat-message-container another-user-message">
-          <p class="new-chat-message-text">
-            catarro roxo branco acerola cozida marionete papagaio lupa bola
-            basquete tucano lúcida uberaba malemolência escrevin errado
-          </p>
-        </article>
       </section>
       <section class="message-external-wrapper">
         <form class="input-1-container" action="/message" method="POST">

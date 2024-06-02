@@ -65,9 +65,10 @@ function updateChatIdInputValue() {
   if (selectedChat == null) return;
 
   const selectedChatId = selectedChat.getAttribute("data-chat-id");
-  const messagesSection = document.querySelector(".current-chat-content");
 
   const allChatMessages = await getAllSelectedChatMessages(selectedChatId);
+
+  appendMessages(allChatMessages);
 })();
 
 async function getAllSelectedChatMessages(chatId) {
@@ -77,6 +78,28 @@ async function getAllSelectedChatMessages(chatId) {
   const allChatMessages = await response.json();
 
   return allChatMessages;
+}
+
+function appendMessages(allChatMessages) {
+  const messagesSection = document.querySelector(".current-chat-content");
+
+  allChatMessages.forEach((message) => {
+    const messageContainer = document.createElement("article");
+    const messageText = document.createElement("p");
+
+    messageContainer.className = "new-chat-message-container";
+    messageText.className = "new-chat-message-text";
+
+    if (message.isFromLoggedUser == false) {
+      messageContainer.classList.add("another-user-message");
+    }
+
+    messageText.innerText = message.content;
+
+    messageContainer.appendChild(messageText);
+
+    messagesSection.appendChild(messageContainer);
+  });
 }
 
 updateChatIdInputValue();
