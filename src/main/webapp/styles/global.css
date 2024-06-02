@@ -41,6 +41,10 @@ button {
   cursor: pointer;
 }
 
+button[disabled="true"] {
+  cursor: none;
+}
+
 input {
   border: none;
 }

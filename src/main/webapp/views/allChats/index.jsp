@@ -51,13 +51,17 @@
         />
         <span>New chat</span>
       </button>
-      <section class="all-chats-container">
-        <h2 class="all-chats-title">All chats</h2>
         <% 
           if(true) {
         %>
-          <p>vazio</p>
+        <article class="empty-message-container">
+          <img class="empty-message-icon" src="https://img.icons8.com/ios-filled/50/add6f7/mailbox-opened-flag-down.png" alt="mailbox-opened-flag-down"/>
+          <h2 class="empty-message-title">You didn't join any chats</h2>
+          <p  class="empty-message-text">Create a new chat or send a message in a existent one</p>
+        </article>
         <% } else { %>
+        <section class="all-chats-container">
+          <h2 class="all-chats-title">All chats</h2>
           <ul class="all-chats-list">
             <li class="all-chats-list-item">
               <h3 class="chat-name">Chat 1</h3>
@@ -88,8 +92,8 @@
               <p class="chat-last-message">Last message</p>
             </li>
           </ul>
+        </section>
         <% } %>
-      </section>
     </aside>
     <main class="current-chat-container">
       <section class="current-chat-content">
@@ -108,9 +112,9 @@
       </section>
       <section class="message-external-wrapper">
         <article class="input-1-container">
-          <textarea class="input-1" placeholder="Type your message...">
+          <textarea disabled="true" class="input-1" placeholder="Type your message...">
           </textarea>
-          <button class="primary-button">
+          <button disabled="true" class="primary-button">
             <span class="primary-button-text">Send</span>
             <img
               class="primary-button-icon"
