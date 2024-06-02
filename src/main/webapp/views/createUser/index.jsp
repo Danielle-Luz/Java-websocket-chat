@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="./../../styles/modal.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/forms.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/toasts.css" type="text/css" />
-    <script src="./index.js" type="text/javascript" defer></script>
+    <script src="./index.js" type="module" defer></script>
     <script src="./../../scripts/hideToast.js" type="text/javascript" defer></script>
   </head>
   <body class="content-container">

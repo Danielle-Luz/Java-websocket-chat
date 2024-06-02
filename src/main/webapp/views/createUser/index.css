@@ -1,4 +1,0 @@
-.register-button:disabled, .register-button:disabled:hover {
-  background-color: var(--color-grey-100);
-  color: var(--color-grey-300);
-}

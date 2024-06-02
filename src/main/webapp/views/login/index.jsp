@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="./../../styles/modal.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/forms.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/toasts.css" type="text/css" />
-    <script src="./index.js" type="text/javascript" defer></script>
+    <script src="./index.js" type="module" defer></script>
     <script src="./../../scripts/hideToast.js" type="text/javascript" defer></script>
   </head>
   <body class="content-container">
@@ -50,7 +50,7 @@
             <input class="input-2" id="password" name="password" type="password" class="" placeholder="Type your password..." autocomplete="off" />
           </fieldset>
           <div class="button-group">
-            <input class="primary-button" type="submit" value="Login" autocomplete="off" />
+            <input id="login-button" class="primary-button" type="submit" value="Login" disabled="true" autocomplete="off" />
             <a href="/views/createUser" class="terciary-button" type="button">Register</a>
           </div>
         </form>
