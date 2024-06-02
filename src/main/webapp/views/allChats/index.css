@@ -119,6 +119,12 @@
   word-break: anywhere;
 }
 
+.new-chat-message-sender {
+  font-size: var(--font-size-text-normal);
+  color: var(--color-grey-100);
+  margin-bottom: 10px;
+}
+
 .another-user-message {
   align-self: flex-end;
   background-color: var(--color-secondary);

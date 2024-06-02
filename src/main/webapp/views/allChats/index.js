@@ -87,9 +87,11 @@ function appendMessages(allChatMessages) {
 
   allChatMessages.forEach((message) => {
     const messageContainer = document.createElement("article");
+    const messageSenderName = document.createElement("h3");
     const messageText = document.createElement("p");
 
     messageContainer.className = "new-chat-message-container";
+    messageSenderName.className = "new-chat-message-sender";
     messageText.className = "new-chat-message-text";
 
     if (message.isFromLoggedUser == false) {
@@ -97,7 +99,9 @@ function appendMessages(allChatMessages) {
     }
 
     messageText.innerText = message.content;
+    messageSenderName.innerText = message.username;
 
+    messageContainer.appendChild(messageSenderName);
     messageContainer.appendChild(messageText);
 
     messagesSection.appendChild(messageContainer);
