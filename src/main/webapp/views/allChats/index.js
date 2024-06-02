@@ -24,6 +24,7 @@
   allChats.forEach((selectedChat) => {
     selectedChat.addEventListener("click", () => {
       addSelectedChatStyle(allChats, selectedChat);
+      showSelectedChatMessages();
       updateChatIdInputValue();
     });
   });
@@ -59,7 +60,7 @@ function updateChatIdInputValue() {
   }
 })();
 
-(async function showSelectedChatMessages() {
+async function showSelectedChatMessages() {
   const selectedChat = document.querySelector(".selected-chat");
 
   if (selectedChat == null) return;
@@ -69,7 +70,7 @@ function updateChatIdInputValue() {
   const allChatMessages = await getAllSelectedChatMessages(selectedChatId);
 
   appendMessages(allChatMessages);
-})();
+};
 
 async function getAllSelectedChatMessages(chatId) {
   const getAllMessagesEndpoint = "/message?chatId=" + chatId;
@@ -82,6 +83,7 @@ async function getAllSelectedChatMessages(chatId) {
 
 function appendMessages(allChatMessages) {
   const messagesSection = document.querySelector(".current-chat-content");
+  messagesSection.innerHTML = "";
 
   allChatMessages.forEach((message) => {
     const messageContainer = document.createElement("article");
@@ -103,3 +105,4 @@ function appendMessages(allChatMessages) {
 }
 
 updateChatIdInputValue();
+showSelectedChatMessages();
