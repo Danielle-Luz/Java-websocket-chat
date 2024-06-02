@@ -26,8 +26,18 @@
       addSelectedChatStyle(allChats, selectedChat);
       showSelectedChatMessages();
       updateChatIdInputValue();
+
+      sessionStorage.setItem("lastChatSelectedId", selectedChat.getAttribute("data-chat-id"));
     });
   });
+})();
+
+(function selectLastSelectedChat() {
+  const lastSelectedChatId = sessionStorage.getItem("lastChatSelectedId");
+  const lastSelectedChat = document.querySelector(`[data-chat-id="${lastSelectedChatId}"]`);
+
+  console.log("last selected chat", lastSelectedChat);
+  lastSelectedChat.click();
 })();
 
 function addSelectedChatStyle(allChats, selectedChat) {
@@ -107,6 +117,17 @@ function appendMessages(allChatMessages) {
     messagesSection.appendChild(messageContainer);
   });
 }
+
+(function sendMessageOnPressingEnter() {
+  const messageForm = document.getElementById("message-form");
+  const messageTextarea = document.getElementById("message-input");
+
+  messageTextarea.addEventListener("input", (event) => {
+    if (event.inputType == "insertLineBreak") {
+      messageForm.submit();
+    }
+  });
+})();
 
 updateChatIdInputValue();
 showSelectedChatMessages();

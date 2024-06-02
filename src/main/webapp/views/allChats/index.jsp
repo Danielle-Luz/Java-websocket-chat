@@ -91,9 +91,8 @@
       <section class="current-chat-content">
       </section>
       <section class="message-external-wrapper">
-        <form class="input-1-container" action="/message" method="POST">
-          <textarea id="message-input" name="content" disabled="true" class="input-1" placeholder="Type your message..."  autocomplete="off">
-          </textarea>
+        <form id="message-form" class="input-1-container" action="/message" method="POST">
+          <textarea id="message-input" name="content" disabled="true" class="input-1" placeholder="Type your message..."  autocomplete="off"></textarea>
           <input id="chat-id-input" name="chatId" type="hidden" autocomplete="off" />
           <button id="send-message-button" disabled="true" class="primary-button">
             <span class="primary-button-text">Send</span>
