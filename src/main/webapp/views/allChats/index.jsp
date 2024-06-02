@@ -56,7 +56,6 @@
         />
         <span>New chat</span>
       </button>
-        <c:set var="token" value='<%= (String) request.getSession().getAttribute("token") %>' scope="session" />
         <c:set var="userRelatedChats" value='<%= ChatService.getAllRelatedChats((String) request.getSession().getAttribute("token")) %>' scope="session" />
         <c:if test="${userRelatedChats.size() == 0}">
           <article class="empty-message-container">
@@ -103,9 +102,10 @@
         </article>
       </section>
       <section class="message-external-wrapper">
-        <article class="input-1-container">
-          <textarea id="message-input" disabled="true" class="input-1" placeholder="Type your message...">
+        <form class="input-1-container" action="/message" method="POST">
+          <textarea id="message-input" name="content" disabled="true" class="input-1" placeholder="Type your message...">
           </textarea>
+          <input id="chat-id-input" name="chatId" type="hidden" />
           <button id="send-message-button" disabled="true" class="primary-button">
             <span class="primary-button-text">Send</span>
             <img
@@ -114,7 +114,7 @@
               alt="Send message icon"
             />
           </button>
-        </article>
+        </form>
       </section>
     </main>
   </body>

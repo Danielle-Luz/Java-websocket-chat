@@ -3,10 +3,12 @@ package services;
 import database.DatabaseConnector;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
 
 public class MessageService {
 
@@ -38,9 +40,18 @@ public class MessageService {
     }
   }
 
-  public static List<Map<String, Object>> getAllChatMessages(String chatId) {
+  public static List<JSONObject> getAllChatMessages(
+    HttpServletRequest request
+  ) {
+    String chatId = request.getParameter("chatId");
+
+    String token = (String) request.getSession().getAttribute("token");
+    int loggedUserId = Integer.parseInt(
+      UserService.validateTokenAndGetSubject(token)
+    );
+
     String getAllMessagesQuery = String.format(
-      "SELECT message.content, user.username FROM message INNER JOIN user ON message.sender_id = user.id WHERE message.chat_id = %s",
+      "SELECT message.content, message.sender_id, user.username FROM message INNER JOIN user ON message.sender_id = user.id WHERE message.chat_id = '%s'",
       chatId
     );
 
@@ -48,6 +59,17 @@ public class MessageService {
       getAllMessagesQuery
     );
 
-    return chatMessages;
+    List<JSONObject> chatMessagesAsJson = new ArrayList<>();
+    chatMessages
+      .stream()
+      .forEach(chatMessage -> {
+        chatMessage.put(
+          "isFromLoggedUser",
+          ((Integer) chatMessage.get("sender_id")) == loggedUserId
+        );
+        chatMessagesAsJson.add(new JSONObject(chatMessage));
+      });
+
+    return chatMessagesAsJson;
   }
 }
