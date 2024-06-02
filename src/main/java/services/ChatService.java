@@ -2,6 +2,8 @@ package services;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,5 +42,26 @@ public class ChatService {
       e.printStackTrace(System.err);
       request.getSession().setAttribute("chatCreationStatusCode", 500);
     }
+  }
+
+  public static List<Map<String, Object>> getAllRelatedChats(HttpServletRequest request, HttpServletResponse response) {
+    String token = (String) request.getSession().getAttribute("token");
+    int loggedUserId = Integer.parseInt(
+      UserService.validateTokenAndGetSubject(token)
+    );
+
+    String getAllRelatedChatsQuery = String.format("SELECT chat.id, chat.name, chat.creator_id FROM chat LEFT JOIN chat_members ON chat.id = chat_members.chat_id WHERE creator_id = %d OR member_id = %d", loggedUserId, loggedUserId);
+
+    List<Map<String, Object>> foundChats =  DatabaseConnector.executeQuery(getAllRelatedChatsQuery);
+
+    System.out.println(foundChats);
+    
+    return foundChats;
+  }
+
+  public static void deleteChat(
+    HttpServletRequest request,
+    HttpServletResponse response
+  ) {
   }
 }
