@@ -3,6 +3,8 @@ package services;
 import database.DatabaseConnector;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -34,5 +36,18 @@ public class MessageService {
       e.printStackTrace(System.err);
       request.getSession().setAttribute("messageSendingStatusCode", 500);
     }
+  }
+
+  public static List<Map<String, Object>> getAllChatMessages(String chatId) {
+    String getAllMessagesQuery = String.format(
+      "SELECT message.content, user.username FROM message INNER JOIN user ON message.sender_id = user.id WHERE message.chat_id = %s",
+      chatId
+    );
+
+    List<Map<String, Object>> chatMessages = DatabaseConnector.executeQuery(
+      getAllMessagesQuery
+    );
+
+    return chatMessages;
   }
 }
