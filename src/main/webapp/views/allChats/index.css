@@ -132,6 +132,10 @@
   border-bottom-right-radius: 0;
 }
 
+.another-user-message .new-chat-message-sender {
+  color: var(--color-grey-300);
+}
+
 .another-user-message .new-chat-message-text {
   color: var(--color-grey-300);
 }
