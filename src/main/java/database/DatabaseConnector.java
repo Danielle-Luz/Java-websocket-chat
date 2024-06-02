@@ -47,20 +47,16 @@ public class DatabaseConnector {
   }
 
   public static List<Map<String, Object>> executeQuery(String sql) {
-    try {
-      Connection connection = DriverManager.getConnection(DATABASE_URL);
+    try(Connection connection = DriverManager.getConnection(DATABASE_URL)) {
       Statement statement = connection.createStatement();
       ResultSet queryResults = statement.executeQuery(sql);
 
       List<Map<String, Object>> clonnedResultSet = cloneResultSet(queryResults);
 
-      connection.close();
-
       return clonnedResultSet;
     } catch (Exception e) {
       e.printStackTrace(System.err);
     }
-
     return null;
   }
 
