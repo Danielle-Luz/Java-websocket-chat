@@ -42,16 +42,19 @@
 
 .all-chats-title {
   background-color: var(--color-grey-300);
+  border-left: 4px solid transparent;
   font-size: var(--font-size-text-big);
-  padding: 0 20px 20px;
+  padding: 10px 20px 20px;
 }
 
 .all-chats-list-item {
   background-color: var(--color-grey-300);
+  border-left: 4px solid transparent;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 10px 20px;
+  padding: 20px;
 }
 
 .chat-name {

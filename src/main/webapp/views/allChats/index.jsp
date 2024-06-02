@@ -1,4 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="services.ChatService" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -51,49 +56,36 @@
         />
         <span>New chat</span>
       </button>
-        <% 
-          if(true) {
-        %>
-        <article class="empty-message-container">
-          <img class="empty-message-icon" src="https://img.icons8.com/ios-filled/50/add6f7/mailbox-opened-flag-down.png" alt="mailbox-opened-flag-down"/>
-          <h2 class="empty-message-title">You didn't join any chats</h2>
-          <p  class="empty-message-text">Create a new chat or send a message in a existent one</p>
-        </article>
-        <% } else { %>
-        <section class="all-chats-container">
-          <h2 class="all-chats-title">All chats</h2>
-          <ul class="all-chats-list">
-            <li class="all-chats-list-item">
-              <h3 class="chat-name">Chat 1</h3>
-              <p class="chat-last-message">Last message</p>
-            </li>
-            <li class="all-chats-list-item">
-              <h3 class="chat-name">Chat 1</h3>
-              <p class="chat-last-message">Last message</p>
-            </li>
-            <li class="all-chats-list-item">
-              <h3 class="chat-name">Chat 1</h3>
-              <p class="chat-last-message">Last message</p>
-            </li>
-            <li class="all-chats-list-item">
-              <h3 class="chat-name">Chat 1</h3>
-              <p class="chat-last-message">Last message</p>
-            </li>
-            <li class="all-chats-list-item">
-              <h3 class="chat-name">Chat 1</h3>
-              <p class="chat-last-message">Last message</p>
-            </li>
-            <li class="all-chats-list-item selected-chat">
-              <h3 class="chat-name">Chat 1</h3>
-              <p class="chat-last-message">Last message</p>
-            </li>
-            <li class="all-chats-list-item">
-              <h3 class="chat-name">Chat 1</h3>
-              <p class="chat-last-message">Last message</p>
-            </li>
-          </ul>
-        </section>
-        <% } %>
+        <c:set var="token" value='<%= (String) request.getSession().getAttribute("token") %>' scope="session" />
+        <c:set var="userRelatedChats" value='<%= ChatService.getAllRelatedChats((String) request.getSession().getAttribute("token")) %>' scope="session" />
+        <c:if test="${userRelatedChats.size() == 0}">
+          <article class="empty-message-container">
+            <img class="empty-message-icon" src="https://img.icons8.com/ios-filled/50/add6f7/mailbox-opened-flag-down.png" alt="mailbox-opened-flag-down"/>
+            <h2 class="empty-message-title">You didn't join any chats</h2>
+            <p  class="empty-message-text">Create a new chat or send a message in a existent one</p>
+          </article>
+        </c:if>
+        <c:if test="${userRelatedChats.size() != 0}">
+          <section class="all-chats-container">
+            <h2 class="all-chats-title">All chats</h2>
+            <ul class="all-chats-list">
+              <c:forEach items="${userRelatedChats}" var="chat" varStatus="item">
+                <c:choose>
+                  <c:when test="${item.index == 0}">
+                    <li class="all-chats-list-item selected-chat" data-chat-id="${chat.id}">
+                      <h3 class="chat-name">${chat.name}</h3>
+                    </li>
+                  </c:when>
+                  <c:otherwise>
+                    <li class="all-chats-list-item" data-chat-id="${chat.id}">
+                      <h3 class="chat-name">${chat.name}</h3>
+                    </li>
+                  </c:otherwise>
+                </c:choose>
+              </c:forEach>
+            </ul>
+          </section>
+        </c:if>
     </aside>
     <main class="current-chat-container">
       <section class="current-chat-content">
@@ -112,9 +104,9 @@
       </section>
       <section class="message-external-wrapper">
         <article class="input-1-container">
-          <textarea disabled="true" class="input-1" placeholder="Type your message...">
+          <textarea id="message-input" disabled="true" class="input-1" placeholder="Type your message...">
           </textarea>
-          <button disabled="true" class="primary-button">
+          <button id="send-message-button" disabled="true" class="primary-button">
             <span class="primary-button-text">Send</span>
             <img
               class="primary-button-icon"

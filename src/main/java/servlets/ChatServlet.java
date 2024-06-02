@@ -17,8 +17,4 @@ public class ChatServlet extends HttpServlet {
     throws ServletException, IOException {
     ChatService.createChat(request, response);
   }
-
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    ChatService.getAllRelatedChats(request, response);
-  }
 }

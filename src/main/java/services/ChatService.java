@@ -44,8 +44,7 @@ public class ChatService {
     }
   }
 
-  public static List<Map<String, Object>> getAllRelatedChats(HttpServletRequest request, HttpServletResponse response) {
-    String token = (String) request.getSession().getAttribute("token");
+  public static List<Map<String, Object>> getAllRelatedChats(String token) {
     int loggedUserId = Integer.parseInt(
       UserService.validateTokenAndGetSubject(token)
     );
@@ -53,8 +52,6 @@ public class ChatService {
     String getAllRelatedChatsQuery = String.format("SELECT chat.id, chat.name, chat.creator_id FROM chat LEFT JOIN chat_members ON chat.id = chat_members.chat_id WHERE creator_id = %d OR member_id = %d", loggedUserId, loggedUserId);
 
     List<Map<String, Object>> foundChats =  DatabaseConnector.executeQuery(getAllRelatedChatsQuery);
-
-    System.out.println(foundChats);
     
     return foundChats;
   }
