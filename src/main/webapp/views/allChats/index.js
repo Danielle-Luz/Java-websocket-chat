@@ -1,18 +1,42 @@
-(function showModal() {
+/*(function showModal() {
   const openModalButton = document.getElementById("new-chat-button");
 
   openModalButton.addEventListener("click", () => {
     const modalContainer = document.querySelector(".modal-external-container");
     modalContainer.classList.remove("hide-modal");
   });
+})();*/
+
+(function onClickShowModalButton() {
+  const openModalButtons = document.querySelectorAll("[data-modal-button]");
+
+  openModalButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const modalContainer = document.getElementById(
+        button.getAttribute("data-modal-id")
+      );
+
+      modalContainer.classList.remove("hide-modal");
+      
+      const modalInput = modalContainer.querySelector("input");
+      modalInput.value = "";
+
+      const modalButton = modalContainer.querySelector("[submit-modal-button]");
+      modalButton.disabled = true;
+    });
+  });
 })();
 
 (function closeModal() {
-  const closeModalButton = document.getElementById("close-modal-button");
+  const closeModalButtons = document.querySelectorAll(
+    "[data-close-modal-button]"
+  );
 
-  closeModalButton.addEventListener("click", () => {
-    const modalContainer = document.querySelector(".modal-external-container");
-    modalContainer.classList.add("hide-modal");
+  closeModalButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const modalContainer = button.parentNode.parentNode;
+      modalContainer.classList.add("hide-modal");
+    });
   });
 })();
 
@@ -27,16 +51,35 @@
       showSelectedChatMessages();
       updateChatIdInputValue();
 
-      sessionStorage.setItem("lastChatSelectedId", selectedChat.getAttribute("data-chat-id"));
+      sessionStorage.setItem(
+        "lastChatSelectedId",
+        selectedChat.getAttribute("data-chat-id")
+      );
+    });
+  });
+})();
+
+(function enableInputs() {
+  const modals = document.querySelectorAll(".modal-external-container");
+
+  modals.forEach((modal) => {
+    const modalInput = modal.querySelector("input");
+    const modalButton = modal.querySelector("[submit-modal-button]");
+
+    modalInput.addEventListener("input", () => {
+      modalButton.disabled = modalInput.value == "";
     });
   });
 })();
 
 (function selectLastSelectedChat() {
   const lastSelectedChatId = sessionStorage.getItem("lastChatSelectedId");
-  const lastSelectedChat = document.querySelector(`[data-chat-id="${lastSelectedChatId}"]`);
+  const lastSelectedChat = document.querySelector(
+    `[data-chat-id="${lastSelectedChatId}"]`
+  );
 
-  console.log("last selected chat", lastSelectedChat);
+  if(lastSelectedChat == null) return;
+
   lastSelectedChat.click();
 })();
 
@@ -80,7 +123,7 @@ async function showSelectedChatMessages() {
   const allChatMessages = await getAllSelectedChatMessages(selectedChatId);
 
   appendMessages(allChatMessages);
-};
+}
 
 async function getAllSelectedChatMessages(chatId) {
   const getAllMessagesEndpoint = "/message?chatId=" + chatId;
