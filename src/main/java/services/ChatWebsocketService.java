@@ -1,16 +1,14 @@
 package services;
 
+import factories.ChatSessionServiceFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
 import javax.websocket.Session;
-
+import models.User;
 import org.json.JSONObject;
-
-import factories.ChatSessionServiceFactory;
 
 public class ChatWebsocketService {
 
@@ -59,22 +57,33 @@ public class ChatWebsocketService {
   }
 
   private static void sendMessageToSessionsInChat(
-    JSONObject messageAsJson,
+    JSONObject receivedMessageAsJson,
     Session senderSession
   ) {
+    String token = receivedMessageAsJson.getString("token");
+    int loggedUserId = Integer.parseInt(
+      UserService.validateTokenAndGetSubject(token)
+    );
+    User loggedUser = UserService.getUserById(loggedUserId);
+
     List<Session> chatSessionsList = addSessionToChatSessionList(
-      messageAsJson,
+      receivedMessageAsJson,
       senderSession
     );
 
-    String message = messageAsJson.getString("message");
+    String message = receivedMessageAsJson.getString("message");
+    JSONObject messageSentToSessions = new JSONObject();
+
+    messageSentToSessions.put("content", message);
+    messageSentToSessions.put("username", loggedUser.getUsername());
+    messageSentToSessions.put("isFromLoggedUser", false);
 
     chatSessionsList
       .stream()
       .forEach(session -> {
         try {
           if (session != senderSession) {
-            session.getBasicRemote().sendText(message);
+            session.getBasicRemote().sendText(messageSentToSessions.toString());
           }
         } catch (IOException e) {
           System.out.println("Error sending message");

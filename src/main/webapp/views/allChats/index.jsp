@@ -122,6 +122,7 @@
       <section class="current-chat-content">
       </section>
       <section class="message-external-wrapper">
+        <span id="token" hidden="true"><%= request.getSession().getAttribute("token") %></span>
         <form id="message-form" class="input-1-container" action="/message" method="POST">
           <textarea id="message-input" name="content" disabled="true" class="input-1" placeholder="Type your message..."  autocomplete="off"></textarea>
           <input id="chat-id-input" name="chatId" type="hidden" autocomplete="off" />

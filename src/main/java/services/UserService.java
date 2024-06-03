@@ -1,17 +1,15 @@
 package services;
 
-import java.io.IOException;
-import java.security.Key;
-import java.util.Date;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import database.DatabaseConnector;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import java.io.IOException;
+import java.security.Key;
+import java.util.Date;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import models.User;
 import utils.EncryptUtils;
 
@@ -90,6 +88,19 @@ public class UserService {
     response.sendRedirect("/views/login/index.jsp?statusCode=401");
 
     return null;
+  }
+
+  public static User getUserById(int userId) {
+    String getUserQuery = String.format(
+      "SELECT username FROM user WHERE id = %d",
+      userId
+    );
+
+    Map<String, Object> foundUserAsMap = DatabaseConnector
+      .executeQuery(getUserQuery)
+      .get(0);
+
+    return new User(userId, (String) foundUserAsMap.get("username"), "");
   }
 
   private static String generateToken(String storedValue) {

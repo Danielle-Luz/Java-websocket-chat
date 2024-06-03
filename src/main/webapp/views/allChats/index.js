@@ -1,11 +1,42 @@
-/*(function showModal() {
-  const openModalButton = document.getElementById("new-chat-button");
+const chatWebsocket = new WebSocket("ws://localhost:8080/chat");
+chatWebsocket.onmessage = receiveMessage;
+chatWebsocket.onopen = () => sendChatId("New session in the chat");
 
-  openModalButton.addEventListener("click", () => {
-    const modalContainer = document.querySelector(".modal-external-container");
-    modalContainer.classList.remove("hide-modal");
+async function sendChatId(type) {
+  const chatId = document.querySelector(".selected-chat").getAttribute("data-chat-id");
+  const messageContent = { chatId, type };
+  chatWebsocket.send(JSON.stringify(messageContent));
+}
+
+async function receiveMessage(event) {
+  const receivedMessage = event.data;
+  const messagesSection = document.querySelector(".current-chat-content");
+
+  appendMessage(receivedMessage, messagesSection);
+}
+
+async function sendMessage() {
+  const messageTextarea = document.getElementById("message-input");
+  const chatId = document.getElementById(".selected-chat").getAttribute("data-chat-id");
+  const messageText = messageTextarea.value;
+  const token = document.getElementById("token").innerText;
+
+  const messageContent = {
+    chatId,
+    type: "New message sent",
+    message: messageText,
+    token
+  };
+
+  chatWebsocket.send(JSON.stringify(messageContent));
+}
+
+(function sendMessageToAllSections() {
+  const messageForm = document.getElementById("message-form");
+  messageForm.addEventListener("submit", (event) => {
+    sendMessage();
   });
-})();*/
+});
 
 (function onClickShowModalButton() {
   const openModalButtons = document.querySelectorAll("[data-modal-button]");
@@ -122,7 +153,7 @@ async function showSelectedChatMessages() {
 
   const allChatMessages = await getAllSelectedChatMessages(selectedChatId);
 
-  appendMessages(allChatMessages);
+  appendAllChatMessages(allChatMessages);
 }
 
 async function getAllSelectedChatMessages(chatId) {
@@ -134,31 +165,33 @@ async function getAllSelectedChatMessages(chatId) {
   return allChatMessages;
 }
 
-function appendMessages(allChatMessages) {
+function appendAllChatMessages(allChatMessages) {
   const messagesSection = document.querySelector(".current-chat-content");
   messagesSection.innerHTML = "";
 
-  allChatMessages.forEach((message) => {
-    const messageContainer = document.createElement("article");
-    const messageSenderName = document.createElement("h3");
-    const messageText = document.createElement("p");
+  allChatMessages.forEach((message) => appendMessage(message, messagesSection));
+}
 
-    messageContainer.className = "new-chat-message-container";
-    messageSenderName.className = "new-chat-message-sender";
-    messageText.className = "new-chat-message-text";
+function appendMessage(message, messagesSection) {
+  const messageContainer = document.createElement("article");
+  const messageSenderName = document.createElement("h3");
+  const messageText = document.createElement("p");
 
-    if (message.isFromLoggedUser == false) {
-      messageContainer.classList.add("another-user-message");
-    }
+  messageContainer.className = "new-chat-message-container";
+  messageSenderName.className = "new-chat-message-sender";
+  messageText.className = "new-chat-message-text";
 
-    messageText.innerText = message.content;
-    messageSenderName.innerText = message.username;
+  if (message.isFromLoggedUser == false) {
+    messageContainer.classList.add("another-user-message");
+  }
 
-    messageContainer.appendChild(messageSenderName);
-    messageContainer.appendChild(messageText);
+  messageText.innerText = message.content;
+  messageSenderName.innerText = message.username;
 
-    messagesSection.appendChild(messageContainer);
-  });
+  messageContainer.appendChild(messageSenderName);
+  messageContainer.appendChild(messageText);
+
+  messagesSection.appendChild(messageContainer);
 }
 
 (function sendMessageOnPressingEnter() {
