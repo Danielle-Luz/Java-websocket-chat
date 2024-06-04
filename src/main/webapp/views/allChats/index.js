@@ -4,7 +4,8 @@ chatWebsocket.onopen = () => sendChatId("New session in the chat");
 
 async function sendChatId(type) {
   const chatId = document.querySelector(".selected-chat").getAttribute("data-chat-id");
-  const messageContent = { chatId, type };
+  const token = document.getElementById("token").innerText;
+  const messageContent = { chatId, token, type };
   chatWebsocket.send(JSON.stringify(messageContent));
 }
 

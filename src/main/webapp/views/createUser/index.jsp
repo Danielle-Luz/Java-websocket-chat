@@ -60,13 +60,16 @@
               autocomplete="off"
             />
           </fieldset>
-          <input
-            class="primary-button register-button"
-            type="submit"
-            value="Register"
-            disabled="true"
-            autocomplete="off"
-          />
+          <div class="button-group">
+            <input
+              class="primary-button register-button"
+              type="submit"
+              value="Register"
+              disabled="true"
+              autocomplete="off"
+            />
+            <a href="/views/login" class="terciary-button" type="button">Login</a>
+          </div>
         </form>
       </div>
     </main>

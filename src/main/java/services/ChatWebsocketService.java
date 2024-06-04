@@ -1,14 +1,17 @@
 package services;
 
-import factories.ChatSessionServiceFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
 import javax.websocket.Session;
-import models.User;
+
 import org.json.JSONObject;
+
+import factories.ChatSessionServiceFactory;
+import models.User;
 
 public class ChatWebsocketService {
 
