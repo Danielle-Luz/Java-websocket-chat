@@ -1,9 +1,13 @@
+import { hideToast } from "../../scripts/hideToast.js";
+
 const chatWebsocket = new WebSocket("ws://localhost:8080/chat");
 chatWebsocket.onmessage = receiveMessage;
 chatWebsocket.onopen = () => sendChatId("New session in the chat");
 
 async function sendChatId(type) {
-  const chatId = document.querySelector(".selected-chat").getAttribute("data-chat-id");
+  const chatId = document
+    .querySelector(".selected-chat")
+    .getAttribute("data-chat-id");
   const token = document.getElementById("token").innerText;
   const messageContent = { chatId, token, type };
   chatWebsocket.send(JSON.stringify(messageContent));
@@ -18,7 +22,9 @@ async function receiveMessage(event) {
 
 async function sendMessage() {
   const messageTextarea = document.getElementById("message-input");
-  const chatId = document.getElementById(".selected-chat").getAttribute("data-chat-id");
+  const chatId = document
+    .getElementById(".selected-chat")
+    .getAttribute("data-chat-id");
   const messageText = messageTextarea.value;
   const token = document.getElementById("token").innerText;
 
@@ -26,7 +32,7 @@ async function sendMessage() {
     chatId,
     type: "New message sent",
     message: messageText,
-    token
+    token,
   };
 
   chatWebsocket.send(JSON.stringify(messageContent));
@@ -49,7 +55,7 @@ async function sendMessage() {
       );
 
       modalContainer.classList.remove("hide-modal");
-      
+
       const modalInput = modalContainer.querySelector("input");
       modalInput.value = "";
 
@@ -110,7 +116,7 @@ async function sendMessage() {
     `[data-chat-id="${lastSelectedChatId}"]`
   );
 
-  if(lastSelectedChat == null) return;
+  if (lastSelectedChat == null) return;
 
   lastSelectedChat.click();
 })();
@@ -203,6 +209,31 @@ function appendMessage(message, messagesSection) {
     if (event.inputType == "insertLineBreak") {
       messageForm.submit();
     }
+  });
+})();
+
+(function copyChatIdOnShareButtonClick() {
+  const shareButton = document.querySelector(".share-chat-button");
+
+  shareButton.addEventListener("click", async () => {
+    const chatId = document.getElementById("chat-id-input").value;
+
+    const popupArticle = document.createElement("article");
+    popupArticle.className = "toast";
+    popupArticle.innerHTML =
+      "<img class='toast-icon' src='https://img.icons8.com/ios/50/20C997/ok--v1.png' alt='Confirm icon'/><h2 class='toast-title'>The chat id was coppied, paste it to share</h2>";
+
+    const body = document.querySelector("body");
+    body.appendChild(popupArticle);
+
+    await navigator.clipboard.writeText(
+      `Insert this chat id after clicking on the join chat button: ${chatId}`
+    );
+
+    shareButton.disabled = true;
+
+    await hideToast(shareButton);
+    popupArticle.remove();
   });
 })();
 

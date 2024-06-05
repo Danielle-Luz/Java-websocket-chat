@@ -16,12 +16,14 @@
     <link rel="stylesheet" href="./../../styles/buttons.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/inputs.css" type="text/css" />
     <link rel="stylesheet" href="./../../styles/modal.css" type="text/css" />
-    <script src="./../../views/allChats/index.js" type="text/javascript" defer></script>
+    <link rel="stylesheet" href="./../../styles/toasts.css" type="text/css" />
+    <script src="./../../views/allChats/index.js" type="module" defer></script>
     <script
       src="./../../scripts/autoResizeTextarea.js"
       type="text/javascript"
       defer
     ></script>
+    <script src="./../../scripts/hideToast.js" type="module" defer></script>
   </head>
   <body class="content-container">
     <div id="new-chat-modal" class="modal-external-container hide-modal">
@@ -137,5 +139,12 @@
         </form>
       </section>
     </main>
+    <button class="share-chat-button">
+      <img 
+        class="primary-button-icon share-icon-button"
+        src="https://img.icons8.com/ios-glyphs/30/004efc/share--v1.png" 
+        alt="share--v1"
+      />
+    </button>
   </body>
 </html>
