@@ -33,8 +33,9 @@ public class DatabaseConnector {
       );
 
       statement.executeUpdate("drop table if exists chat_members");
+      statement.executeUpdate("drop table if exists chat_member");
       statement.executeUpdate(
-        "CREATE TABLE chat_members (id INTEGER PRIMARY KEY AUTOINCREMENT, member_id INTEGER NOT NULL, chat_id INTEGER NOT NULL, FOREIGN KEY(member_id) REFERENCES user(id), FOREIGN KEY(chat_id) REFERENCES chat(id));"
+        "CREATE TABLE chat_member (id INTEGER PRIMARY KEY AUTOINCREMENT, member_id INTEGER NOT NULL, chat_id INTEGER NOT NULL, FOREIGN KEY(member_id) REFERENCES user(id), FOREIGN KEY(chat_id) REFERENCES chat(id));"
       );
 
       statement.executeUpdate("drop table if exists message");

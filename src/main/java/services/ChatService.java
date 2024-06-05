@@ -49,7 +49,7 @@ public class ChatService {
       UserService.validateTokenAndGetSubject(token)
     );
 
-    String getAllRelatedChatsQuery = String.format("SELECT chat.id, chat.name, chat.creator_id FROM chat LEFT JOIN chat_members ON chat.id = chat_members.chat_id WHERE creator_id = %d OR member_id = %d", loggedUserId, loggedUserId);
+    String getAllRelatedChatsQuery = String.format("SELECT chat.id, chat.name, chat.creator_id FROM chat LEFT JOIN chat_member ON chat.id = chat_member.chat_id WHERE creator_id = %d OR member_id = %d", loggedUserId, loggedUserId);
 
     List<Map<String, Object>> foundChats =  DatabaseConnector.executeQuery(getAllRelatedChatsQuery);
     

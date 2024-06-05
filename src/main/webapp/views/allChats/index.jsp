@@ -58,7 +58,7 @@
             alt="cancel"
           />
         </button>
-        <form class="modal" action="" method="POST">
+        <form class="modal" action="/chatMember" method="POST">
           <h2 class="modal-title">Join existent chat</h2>
           <input
             id="chatId"
