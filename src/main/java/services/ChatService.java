@@ -56,6 +56,12 @@ public class ChatService {
     return foundChats;
   }
 
+  public static Map<String, Object> getChatById(String chatId) {
+    String getAllRelatedChatsQuery = String.format("SELECT id, name, creator_id FROM chat WHERE id = '%s'", chatId);
+
+    return DatabaseConnector.executeQuery(getAllRelatedChatsQuery).get(0);
+  }
+
   public static void deleteChat(
     HttpServletRequest request,
     HttpServletResponse response

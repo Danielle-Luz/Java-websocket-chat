@@ -26,6 +26,18 @@
     <script src="./../../scripts/hideToast.js" type="module" defer></script>
   </head>
   <body class="content-container">
+    <%
+     String addMemberStatusCode = (String) request.getSession().getAttribute("addMemberStatusCode");
+      if(addMemberStatusCode != null) {
+        String toastMessage = addMemberStatusCode.equals("404") ? 
+          "No chat with the provided id was found" : 
+          "You are already a member of the chat with the provided id";
+      
+        out.println("<article class=\"toast\"><img class=\"toast-icon\" src=\"https://img.icons8.com/material-outlined/24/FA5252/cancel--v1.png\" alt=\"Error icon\"/><h2 class=\"toast-title\">"+ toastMessage +"</h2></article>");
+
+        request.getSession().removeAttribute("addMemberStatusCode");
+      }
+    %>
     <div id="new-chat-modal" class="modal-external-container hide-modal">
       <div class="modal-container">
         <button class="icon-button" data-close-modal-button>
